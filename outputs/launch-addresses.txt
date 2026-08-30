@@ -1,0 +1,24 @@
+IPO Launch Addresses
+
+FUND THIS WALLET FIRST
+Deployer / launch authority:
+7vHThHyHXzEXyNwFYC4y2bVBAa5A4nAY2wUddr99dJ7C
+
+Recommended setup funding:
+2 SOL
+
+Generated public addresses:
+Treasury wallet:
+5AjpQUTJSD4PJAx7v6saLv1wLwABk7pJn83q9tgiX875
+
+IPO mint:
+CG4jSsRE73DeL8PoBuusjiRgFhyJTGbogJttubM2GGdj
+
+Metaplex Core collection:
+3oWH9UQ2E8D7GuHUAfzn1GTkB9HAoEfbRo7JJ7e4o4RK
+
+Anchor program id:
+2P9ehfkHUgght4YmW43YG1vEqFatKa3zKAkaV5ona7wo
+
+Current blocker:
+The deployer wallet currently has 0 SOL on mainnet. Fund it before running mainnet setup.

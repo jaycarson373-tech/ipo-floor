@@ -1,0 +1,129 @@
+{
+  "name": "IPO Floor Insider GTA-280",
+  "symbol": "IPO",
+  "description": "An anonymous IPO Floor insider at a trading desk. Metaplex Core NFT for Initial Pump Offering access, upgrades, rentals, and launchpad priority.",
+  "image": "images/GTA-280.svg",
+  "attributes": [
+    {
+      "trait_type": "Company Track",
+      "value": "GTA"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Rare"
+    },
+    {
+      "trait_type": "Hood / Clothing",
+      "value": "black hoodie"
+    },
+    {
+      "trait_type": "Face / Identity",
+      "value": "black mask"
+    },
+    {
+      "trait_type": "Eyewear",
+      "value": "none"
+    },
+    {
+      "trait_type": "Desk",
+      "value": "cheap wooden desk"
+    },
+    {
+      "trait_type": "Monitor Configuration",
+      "value": "dual monitor"
+    },
+    {
+      "trait_type": "Room",
+      "value": "small office"
+    },
+    {
+      "trait_type": "Screen Content",
+      "value": "multiple feeds"
+    },
+    {
+      "trait_type": "Desk Items",
+      "value": "burner phone, notebook, laptop, hardware wallet, cash, confidential folder"
+    },
+    {
+      "trait_type": "Lighting",
+      "value": "red market glow"
+    },
+    {
+      "trait_type": "Background",
+      "value": "trading floor"
+    },
+    {
+      "trait_type": "Special Trait",
+      "value": "multiple burner phones"
+    },
+    {
+      "trait_type": "Access / Status Visual",
+      "value": "holder lane"
+    },
+    {
+      "trait_type": "Upgrade Statuses",
+      "value": "Intern, Analyst, Trader, Insider, Partner"
+    },
+    {
+      "trait_type": "Insider Serial",
+      "value": 280
+    }
+  ],
+  "properties": {
+    "category": "image",
+    "files": [
+      {
+        "uri": "images/GTA-280.svg",
+        "type": "image/svg+xml"
+      },
+      {
+        "uri": "images/GTA-280-L1.svg",
+        "type": "image/svg+xml"
+      },
+      {
+        "uri": "images/GTA-280-L2.svg",
+        "type": "image/svg+xml"
+      },
+      {
+        "uri": "images/GTA-280-L3.svg",
+        "type": "image/svg+xml"
+      },
+      {
+        "uri": "images/GTA-280-L4.svg",
+        "type": "image/svg+xml"
+      },
+      {
+        "uri": "images/GTA-280-L5.svg",
+        "type": "image/svg+xml"
+      }
+    ],
+    "upgrade_images": [
+      {
+        "level": 1,
+        "status": "Intern",
+        "uri": "images/GTA-280-L1.svg"
+      },
+      {
+        "level": 2,
+        "status": "Analyst",
+        "uri": "images/GTA-280-L2.svg"
+      },
+      {
+        "level": 3,
+        "status": "Trader",
+        "uri": "images/GTA-280-L3.svg"
+      },
+      {
+        "level": 4,
+        "status": "Insider",
+        "uri": "images/GTA-280-L4.svg"
+      },
+      {
+        "level": 5,
+        "status": "Partner",
+        "uri": "images/GTA-280-L5.svg"
+      }
+    ],
+    "seed": "ipo-floor-insider-280"
+  }
+}

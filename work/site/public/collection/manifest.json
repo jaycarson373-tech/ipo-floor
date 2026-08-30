@@ -1,0 +1,74 @@
+{
+  "name": "IPO Floor Insider Collection",
+  "symbol": "IPO",
+  "standard": "Metaplex Core",
+  "supply": 333,
+  "artDirection": "IPO FLOOR: 333 anonymous insiders. Every insider has a desk. Every desk has access. Burn IPO to move up the floor.",
+  "traitCategories": [
+    "Hood / Clothing",
+    "Face / Identity",
+    "Eyewear",
+    "Desk",
+    "Monitor Configuration",
+    "Room",
+    "Screen Content",
+    "Desk Items",
+    "Lighting",
+    "Background",
+    "Special Trait",
+    "Access / Status Visual"
+  ],
+  "upgradeStatuses": [
+    "Intern",
+    "Analyst",
+    "Trader",
+    "Insider",
+    "Partner"
+  ],
+  "mintPrice": {
+    "sol": 0.25,
+    "ipo": 1000000
+  },
+  "companies": [
+    {
+      "ticker": "GTA",
+      "name": "GTA"
+    },
+    {
+      "ticker": "NLNK",
+      "name": "Neuralink"
+    },
+    {
+      "ticker": "ANTH",
+      "name": "Anthropic"
+    }
+  ],
+  "rarities": [
+    {
+      "name": "Common",
+      "min": 1,
+      "max": 180
+    },
+    {
+      "name": "Uncommon",
+      "min": 181,
+      "max": 250
+    },
+    {
+      "name": "Rare",
+      "min": 251,
+      "max": 305
+    },
+    {
+      "name": "Epic",
+      "min": 306,
+      "max": 328
+    },
+    {
+      "name": "Mythic",
+      "min": 329,
+      "max": 333
+    }
+  ],
+  "generatedAt": "2026-08-29T21:36:41.536Z"
+}

@@ -1,0 +1,12 @@
+work/keys/
+**/*keypair*.json
+**/.env
+**/.env.local
+**/node_modules/
+**/dist/
+**/.next/
+**/.vinext/
+**/target/
+outputs/*
+!outputs/launch-addresses.txt
+!outputs/ipo-insider-preview-30.svg.png

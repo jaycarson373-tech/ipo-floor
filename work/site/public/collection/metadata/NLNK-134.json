@@ -1,0 +1,129 @@
+{
+  "name": "IPO Floor Insider NLNK-134",
+  "symbol": "IPO",
+  "description": "An anonymous IPO Floor insider at a trading desk. Metaplex Core NFT for Initial Pump Offering access, upgrades, rentals, and launchpad priority.",
+  "image": "images/NLNK-134.svg",
+  "attributes": [
+    {
+      "trait_type": "Company Track",
+      "value": "Neuralink"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Common"
+    },
+    {
+      "trait_type": "Hood / Clothing",
+      "value": "green hoodie"
+    },
+    {
+      "trait_type": "Face / Identity",
+      "value": "complete shadow"
+    },
+    {
+      "trait_type": "Eyewear",
+      "value": "none"
+    },
+    {
+      "trait_type": "Desk",
+      "value": "black workstation"
+    },
+    {
+      "trait_type": "Monitor Configuration",
+      "value": "dual monitor"
+    },
+    {
+      "trait_type": "Room",
+      "value": "basement"
+    },
+    {
+      "trait_type": "Screen Content",
+      "value": "new IPO feed"
+    },
+    {
+      "trait_type": "Desk Items",
+      "value": "burner phone, confidential folder, hardware wallet, notebook"
+    },
+    {
+      "trait_type": "Lighting",
+      "value": "blue monitor glow"
+    },
+    {
+      "trait_type": "Background",
+      "value": "plain office"
+    },
+    {
+      "trait_type": "Special Trait",
+      "value": "none"
+    },
+    {
+      "trait_type": "Access / Status Visual",
+      "value": "floor pass"
+    },
+    {
+      "trait_type": "Upgrade Statuses",
+      "value": "Intern, Analyst, Trader, Insider, Partner"
+    },
+    {
+      "trait_type": "Insider Serial",
+      "value": 134
+    }
+  ],
+  "properties": {
+    "category": "image",
+    "files": [
+      {
+        "uri": "images/NLNK-134.svg",
+        "type": "image/svg+xml"
+      },
+      {
+        "uri": "images/NLNK-134-L1.svg",
+        "type": "image/svg+xml"
+      },
+      {
+        "uri": "images/NLNK-134-L2.svg",
+        "type": "image/svg+xml"
+      },
+      {
+        "uri": "images/NLNK-134-L3.svg",
+        "type": "image/svg+xml"
+      },
+      {
+        "uri": "images/NLNK-134-L4.svg",
+        "type": "image/svg+xml"
+      },
+      {
+        "uri": "images/NLNK-134-L5.svg",
+        "type": "image/svg+xml"
+      }
+    ],
+    "upgrade_images": [
+      {
+        "level": 1,
+        "status": "Intern",
+        "uri": "images/NLNK-134-L1.svg"
+      },
+      {
+        "level": 2,
+        "status": "Analyst",
+        "uri": "images/NLNK-134-L2.svg"
+      },
+      {
+        "level": 3,
+        "status": "Trader",
+        "uri": "images/NLNK-134-L3.svg"
+      },
+      {
+        "level": 4,
+        "status": "Insider",
+        "uri": "images/NLNK-134-L4.svg"
+      },
+      {
+        "level": 5,
+        "status": "Partner",
+        "uri": "images/NLNK-134-L5.svg"
+      }
+    ],
+    "seed": "ipo-floor-insider-134"
+  }
+}

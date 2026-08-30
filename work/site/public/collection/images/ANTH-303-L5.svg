@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1400" viewBox="0 0 1400 1400">
+  <defs>
+    <linearGradient id="room" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#040505"/><stop offset=".58" stop-color="#0b0f0e"/><stop offset="1" stop-color="#171b1a"/></linearGradient>
+    <radialGradient id="glow" cx="50%" cy="47%" r="58%"><stop offset="0" stop-color="#f0b65a" stop-opacity=".62"/><stop offset=".45" stop-color="#ff7a35" stop-opacity=".17"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter>
+  </defs>
+  <rect width="1400" height="1400" fill="url(#room)"/>
+  <rect x="54" y="54" width="1292" height="1292" rx="46" fill="none" stroke="#27302f" stroke-width="16"/>
+  <rect x="88" y="88" width="1224" height="1224" rx="26" fill="none" stroke="#ffc83d" stroke-width="4" opacity=".38"/>
+  <circle cx="700" cy="620" r="626" fill="url(#glow)" filter="url(#soft)"/>
+  <rect x="82" y="230" width="175" height="550" rx="10" fill="#0b1012" stroke="#1d2a2b" stroke-width="8" /><rect x="1142" y="230" width="175" height="550" rx="10" fill="#0b1012" stroke="#1d2a2b" stroke-width="8" />
+      <path d="M112 304L226 304" stroke="#ff7a35" stroke-width="8" stroke-linecap="round" opacity="0.38" fill="none"/><path d="M1172 304L1286 304" stroke="#ffc83d" stroke-width="8" stroke-linecap="round" opacity="0.38" fill="none"/><path d="M112 366L226 366" stroke="#ffc83d" stroke-width="8" stroke-linecap="round" opacity="0.38" fill="none"/><path d="M1172 366L1286 366" stroke="#ff7a35" stroke-width="8" stroke-linecap="round" opacity="0.38" fill="none"/><path d="M112 428L226 428" stroke="#ff7a35" stroke-width="8" stroke-linecap="round" opacity="0.38" fill="none"/><path d="M1172 428L1286 428" stroke="#ffc83d" stroke-width="8" stroke-linecap="round" opacity="0.38" fill="none"/><path d="M112 490L226 490" stroke="#ffc83d" stroke-width="8" stroke-linecap="round" opacity="0.38" fill="none"/><path d="M1172 490L1286 490" stroke="#ff7a35" stroke-width="8" stroke-linecap="round" opacity="0.38" fill="none"/><path d="M112 552L226 552" stroke="#ff7a35" stroke-width="8" stroke-linecap="round" opacity="0.38" fill="none"/><path d="M1172 552L1286 552" stroke="#ffc83d" stroke-width="8" stroke-linecap="round" opacity="0.38" fill="none"/><path d="M112 614L226 614" stroke="#ffc83d" stroke-width="8" stroke-linecap="round" opacity="0.38" fill="none"/><path d="M1172 614L1286 614" stroke="#ff7a35" stroke-width="8" stroke-linecap="round" opacity="0.38" fill="none"/><path d="M112 676L226 676" stroke="#ff7a35" stroke-width="8" stroke-linecap="round" opacity="0.38" fill="none"/><path d="M1172 676L1286 676" stroke="#ffc83d" stroke-width="8" stroke-linecap="round" opacity="0.38" fill="none"/>
+  <rect x="259" y="230" width="207" height="185" rx="16" fill="#060909" stroke="#111515" stroke-width="10" />
+    <rect x="277" y="248" width="171" height="137" rx="8" fill="#101819" stroke="#ffc83d" stroke-width="4" opacity=".88"/>
+    <path d="M303 292L358.36 292" stroke="#f0b65a" stroke-width="8" stroke-linecap="round" opacity="0.85" fill="none"/>
+    <path d="M303 332L397.69 332" stroke="#fff1bd" stroke-width="6" stroke-linecap="round" opacity="0.55" fill="none"/>
+    <path d="M362.5 331l36-46 52 36 70-78 70 86" stroke="#ffc83d" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".85"/>
+    <text x="362.5" y="397" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17.25" fill="#fff1bd" opacity=".72">INSIDER FLOW</text><rect x="484" y="230" width="207" height="185" rx="16" fill="#060909" stroke="#111515" stroke-width="10" />
+    <rect x="502" y="248" width="171" height="137" rx="8" fill="#101819" stroke="#ffc83d" stroke-width="4" opacity=".88"/>
+    <path d="M528 292L583.36 292" stroke="#f0b65a" stroke-width="8" stroke-linecap="round" opacity="0.85" fill="none"/>
+    <path d="M528 332L622.69 332" stroke="#fff1bd" stroke-width="6" stroke-linecap="round" opacity="0.55" fill="none"/>
+    <path d="M587.5 331l36-46 52 36 70-78 70 86" stroke="#ffc83d" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".85"/>
+    <text x="587.5" y="397" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17.25" fill="#fff1bd" opacity=".72">ORDER BOOK</text><rect x="709" y="230" width="207" height="185" rx="16" fill="#060909" stroke="#111515" stroke-width="10" />
+    <rect x="727" y="248" width="171" height="137" rx="8" fill="#101819" stroke="#ffc83d" stroke-width="4" opacity=".88"/>
+    <path d="M753 292L808.36 292" stroke="#f0b65a" stroke-width="8" stroke-linecap="round" opacity="0.85" fill="none"/>
+    <path d="M753 332L847.69 332" stroke="#fff1bd" stroke-width="6" stroke-linecap="round" opacity="0.55" fill="none"/>
+    <path d="M812.5 331l36-46 52 36 70-78 70 86" stroke="#ffc83d" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".85"/>
+    <text x="812.5" y="397" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17.25" fill="#fff1bd" opacity=".72">WALLET TRACKER</text><rect x="934" y="230" width="207" height="185" rx="16" fill="#060909" stroke="#111515" stroke-width="10" />
+    <rect x="952" y="248" width="171" height="137" rx="8" fill="#101819" stroke="#ffc83d" stroke-width="4" opacity=".88"/>
+    <path d="M978 292L1033.36 292" stroke="#f0b65a" stroke-width="8" stroke-linecap="round" opacity="0.85" fill="none"/>
+    <path d="M978 332L1072.69 332" stroke="#fff1bd" stroke-width="6" stroke-linecap="round" opacity="0.55" fill="none"/>
+    <path d="M1037.5 331l36-46 52 36 70-78 70 86" stroke="#ffc83d" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".85"/>
+    <text x="1037.5" y="397" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17.25" fill="#fff1bd" opacity=".72">PUMP.FUN FEED</text><rect x="319" y="455" width="242" height="178" rx="16" fill="#060909" stroke="#111515" stroke-width="10" />
+    <rect x="337" y="473" width="206" height="130" rx="8" fill="#101819" stroke="#ffc83d" stroke-width="4" opacity=".88"/>
+    <path d="M363 517L435.15999999999997 517" stroke="#f0b65a" stroke-width="8" stroke-linecap="round" opacity="0.85" fill="none"/>
+    <path d="M363 557L481.14 557" stroke="#fff1bd" stroke-width="6" stroke-linecap="round" opacity="0.55" fill="none"/>
+    <path d="M440 549l36-46 52 36 70-78 70 86" stroke="#ffc83d" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".85"/>
+    <text x="440" y="615" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="20.166666666666668" fill="#fff1bd" opacity=".72">TOKEN SCANNER</text><rect x="579" y="455" width="242" height="178" rx="16" fill="#060909" stroke="#111515" stroke-width="10" />
+    <rect x="597" y="473" width="206" height="130" rx="8" fill="#101819" stroke="#ffc83d" stroke-width="4" opacity=".88"/>
+    <path d="M623 517L695.16 517" stroke="#f0b65a" stroke-width="8" stroke-linecap="round" opacity="0.85" fill="none"/>
+    <path d="M623 557L741.14 557" stroke="#fff1bd" stroke-width="6" stroke-linecap="round" opacity="0.55" fill="none"/>
+    <path d="M700 549l36-46 52 36 70-78 70 86" stroke="#ffc83d" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".85"/>
+    <text x="700" y="615" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="20.166666666666668" fill="#fff1bd" opacity=".72">MULTIPLE FEEDS</text><rect x="839" y="455" width="242" height="178" rx="16" fill="#060909" stroke="#111515" stroke-width="10" />
+    <rect x="857" y="473" width="206" height="130" rx="8" fill="#101819" stroke="#ffc83d" stroke-width="4" opacity=".88"/>
+    <path d="M883 517L955.16 517" stroke="#f0b65a" stroke-width="8" stroke-linecap="round" opacity="0.85" fill="none"/>
+    <path d="M883 557L1001.14 557" stroke="#fff1bd" stroke-width="6" stroke-linecap="round" opacity="0.55" fill="none"/>
+    <path d="M960 549l36-46 52 36 70-78 70 86" stroke="#ffc83d" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".85"/>
+    <text x="960" y="615" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="20.166666666666668" fill="#fff1bd" opacity=".72">INSIDER FLOW</text>
+  <ellipse cx="700" cy="920" rx="360" ry="58" fill="#020303" opacity=".38"/>
+    <path d="M545 744c22-210 74-314 155-314s133 104 155 314z" fill="#101413" stroke="#050606" stroke-width="12" stroke-linejoin="round" />
+    <path d="M530 740c42-34 92-52 170-52s128 18 170 52l58 280H472z" fill="#101413" stroke="#050606" stroke-width="12" stroke-linejoin="round" />
+    <path d="M596 750c38 42 170 42 208 0l-28 112H624z" fill="#090d0d" stroke="#050606" stroke-width="7" stroke-linejoin="round" opacity=".36"/>
+    <path d="M646 770L626 930" stroke="#ffc83d" stroke-width="5" stroke-linecap="round" opacity="0.35" fill="none"/><path d="M754 770L774 930" stroke="#ffc83d" stroke-width="5" stroke-linecap="round" opacity="0.35" fill="none"/>
+    <path d="M678 708L656 832" stroke="#fff1bd" stroke-width="4" stroke-linecap="round" opacity="0.55" fill="none"/><path d="M722 708L744 832" stroke="#fff1bd" stroke-width="4" stroke-linecap="round" opacity="0.55" fill="none"/>
+    <ellipse cx="700" cy="528" rx="78" ry="92" fill="#050707" stroke="#050606" stroke-width="10"/><path d="M652 518L748 518" stroke="#ffc83d" stroke-width="8" stroke-linecap="round" opacity="0.45" fill="none"/><rect x="624" y="500" width="58" height="34" rx="10" fill="#061010" stroke="#ffc83d" stroke-width="5" opacity=".92"/><rect x="718" y="500" width="58" height="34" rx="10" fill="#061010" stroke="#ffc83d" stroke-width="5" opacity=".92"/><path d="M682 518L718 518" stroke="#ffc83d" stroke-width="5" stroke-linecap="round" opacity="0.9" fill="none"/>
+    <path d="M470 860c-88 66-126 132-130 214h156c20-90 62-145 126-168z" fill="#101413" stroke="#050606" stroke-width="12" stroke-linejoin="round" />
+    <path d="M930 860c88 66 126 132 130 214H904c-20-90-62-145-126-168z" fill="#101413" stroke="#050606" stroke-width="12" stroke-linejoin="round" />
+  <path d="M130 870h1140l96 330H34z" fill="#111616" stroke="#050606" stroke-width="20" stroke-linejoin="round" />
+    <path d="M165 898h1070l58 210H108z" fill="#0d1111" opacity=".36"/>
+    <path d="M240 934L1160 934" stroke="#ffc83d" stroke-width="12" stroke-linecap="round" opacity="0.48" fill="none"/>
+    <path d="M520 926c-70 38-128 82-178 134l90 42c48-52 94-86 142-104z" fill="#101413" stroke="#050606" stroke-width="10" stroke-linejoin="round" />
+    <path d="M880 926c70 38 128 82 178 134l-90 42c-48-52-94-86-142-104z" fill="#101413" stroke="#050606" stroke-width="10" stroke-linejoin="round" />
+    <rect x="416" y="1076" width="76" height="42" rx="16" fill="#e8e2d6" stroke="#050606" stroke-width="7" />
+    <rect x="908" y="1076" width="76" height="42" rx="16" fill="#e8e2d6" stroke="#050606" stroke-width="7" />
+    <rect x="500" y="965" width="400" height="118" rx="18" fill="#070a0a" stroke="#050606" stroke-width="12" />
+    <path d="M545 1010L855 1010" stroke="#ffc83d" stroke-width="13" stroke-linecap="round" opacity="0.7" fill="none"/><path d="M570 1054L830 1054" stroke="#fff1bd" stroke-width="10" stroke-linecap="round" opacity="0.55" fill="none"/>
+    <rect x="575" y="1115" width="250" height="54" rx="14" fill="#080c0c" stroke="#050606" stroke-width="9" /><path d="M608 1142L792 1142" stroke="#fff1bd" stroke-width="7" stroke-linecap="round" opacity="0.58" fill="none"/>
+    <rect x="161" y="1045" width="78" height="40" rx="10" fill="#080c0c" stroke="#050606" stroke-width="7" /><rect x="195" y="1073" width="78" height="40" rx="10" fill="#080c0c" stroke="#050606" stroke-width="7" /><path d="M207 1095L255 1095" stroke="#ff7a35" stroke-width="5" stroke-linecap="round" opacity="0.7" fill="none"/><rect x="295" y="1103" width="108" height="72" rx="8" fill="#14191a" stroke="#050606" stroke-width="7" /><path d="M313 1128L381 1128" stroke="#fff1bd" stroke-width="4" stroke-linecap="round" opacity="0.55" fill="none"/><path d="M313 1151L365 1151" stroke="#ffc83d" stroke-width="4" stroke-linecap="round" opacity="0.55" fill="none"/><rect x="447" y="1045" width="84" height="42" rx="10" fill="#080c0c" stroke="#050606" stroke-width="7" /><path d="M461 1067L511 1067" stroke="#ffc83d" stroke-width="5" stroke-linecap="round" opacity="0.75" fill="none"/><rect x="583" y="1103" width="34" height="82" rx="8" fill="#ffc83d" stroke="#050606" stroke-width="7" /><path d="M592 1131L608 1131" stroke="#050606" stroke-width="4" stroke-linecap="round" opacity="0.6" fill="none"/><rect x="723" y="1045" width="128" height="58" rx="8" fill="#101616" stroke="#050606" stroke-width="7" /><path d="M739 1073L831 1073" stroke="#ffc83d" stroke-width="5" stroke-linecap="round" opacity="0.72" fill="none"/><path d="M866 1121h48l18-16h88v82H866z" fill="#d2b15a" stroke="#050606" stroke-width="7" stroke-linejoin="round" /><path d="M886 1155L986 1155" stroke="#050606" stroke-width="4" stroke-linecap="round" opacity="0.35" fill="none"/><rect x="1040" y="1020" width="128" height="58" rx="8" fill="#101616" stroke="#050606" stroke-width="7" /><path d="M1056 1048L1148 1048" stroke="#ffc83d" stroke-width="5" stroke-linecap="round" opacity="0.72" fill="none"/>
+  <rect x="114" y="112" width="220" height="58" rx="14" fill="#0a0d0d" stroke="#ffc83d" stroke-width="5"/>
+  <text x="224" y="151" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800" fill="#fff1bd">$IPO</text>
+  <rect x="1058" y="112" width="228" height="58" rx="14" fill="#0a0d0d" stroke="#27302f" stroke-width="5"/>
+  <text x="1172" y="151" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800" fill="#fff1bd">IPO #303</text>
+  <desc>IPO Floor anonymous insider ANTH-303: black hoodie, reflective glasses and shadow, dark glasses, trading floor, triple monitor, wallet tracker, Rare, Partner</desc>
+</svg>

@@ -1,0 +1,18 @@
+{
+  "name": "ipo-floor-insiders",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "cd work/site && npm run dev --",
+    "build": "cd work/site && npm run build",
+    "start": "cd work/site && npm run start --",
+    "lint": "cd work/site && npm run lint",
+    "generate:collection": "cd work/site && npm run generate:collection",
+    "mint:core": "cd work/site && npm run mint:core",
+    "anchor:build": "cd work/program && npm run build"
+  }
+}

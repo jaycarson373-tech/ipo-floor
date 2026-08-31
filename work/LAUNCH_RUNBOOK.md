@@ -2,7 +2,8 @@
 
 ## What Is Built
 
-- Mint site in `work/site`
+- Public mint site in `work/site`
+- Live site: `https://ipo-floor.sufficientlev.chatgpt.site`
 - 333 generated anonymous insider NFT images in `work/site/public/collection/images`
 - 333 matching metadata files in `work/site/public/collection/metadata`
 - Metaplex Core mint worker in `work/site/scripts/mint-core-assets.mjs`
@@ -35,7 +36,12 @@ Fund the deployer / launch authority with setup SOL first:
 
 Recommended setup funding: `2 SOL`.
 
-Before mainnet launch, fill these values in `work/site/.env`:
+Current mainnet funding status checked on 2026-08-31:
+
+- Deployer / launch authority: `0 SOL`
+- Treasury wallet: `0 SOL`
+
+Before mainnet launch, fill these values in `work/site/.env.local` and hosted runtime environment:
 
 ```bash
 NEXT_PUBLIC_SOLANA_CLUSTER=mainnet-beta
@@ -47,6 +53,8 @@ NEXT_PUBLIC_TREASURY_WALLET=
 NEXT_PUBLIC_CORE_COLLECTION=
 NEXT_PUBLIC_METADATA_BASE_URL=
 ```
+
+`NEXT_PUBLIC_IPO_VAULT` is intentionally blank until the IPO token vault is created on mainnet.
 
 ## Mainnet Safety Checklist
 

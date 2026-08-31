@@ -1,5 +1,7 @@
 'use client';
 
+/* eslint-disable @next/next/no-img-element */
+
 import { useMemo, useState } from 'react';
 import type { CSSProperties } from 'react';
 import { launchConfig } from './launch-config';

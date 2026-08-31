@@ -206,7 +206,7 @@ function monitorsSvg(t, level) {
   return `${top}${bottom}`;
 }
 
-function insiderSvg(t, level) {
+function insiderSvg(t) {
   const cx = 700;
   const bodyY = 672;
   const hoodFill = t.clothing[1];
@@ -287,7 +287,7 @@ function svgFor(serial, level) {
   <circle cx="700" cy="620" r="${390 + t.score * 42 + level * 22}" fill="url(#glow)" filter="url(#soft)"/>
   ${backgroundSvg(t, level)}
   ${monitorsSvg(t, level)}
-  ${insiderSvg(t, level)}
+  ${insiderSvg(t)}
   ${deskSvg(t, level)}
   <rect x="114" y="112" width="220" height="58" rx="14" fill="#0a0d0d" stroke="${c.accent}" stroke-width="5"/>
   <text x="224" y="151" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800" fill="${c.warm}">$IPO</text>

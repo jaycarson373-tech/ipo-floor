@@ -6,13 +6,17 @@
   "engines": {
     "node": ">=22.13.0"
   },
+  "workspaces": [
+    "work/site",
+    "work/program"
+  ],
   "scripts": {
-    "dev": "cd work/site && npm run dev --",
-    "build": "cd work/site && npm run build",
-    "start": "cd work/site && npm run start --",
-    "lint": "cd work/site && npm run lint",
-    "generate:collection": "cd work/site && npm run generate:collection",
-    "mint:core": "cd work/site && npm run mint:core",
-    "anchor:build": "cd work/program && npm run build"
+    "dev": "npm --workspace sites-project run dev --",
+    "build": "npm --workspace sites-project run build",
+    "start": "npm --workspace sites-project run start --",
+    "lint": "npm --workspace sites-project run lint",
+    "generate:collection": "npm --workspace sites-project run generate:collection",
+    "mint:core": "npm --workspace sites-project run mint:core",
+    "anchor:build": "npm --workspace program run build"
   }
 }

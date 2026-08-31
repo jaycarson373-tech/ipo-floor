@@ -208,35 +208,37 @@ function monitorsSvg(t, level) {
 
 function insiderSvg(t, level) {
   const cx = 700;
-  const bodyY = 690;
+  const bodyY = 672;
   const hoodFill = t.clothing[1];
-  const faceFill = t.identity[1];
-  const hood = t.clothing[2] || t.clothing[0].includes('hoodie');
-  const bodyWidth = 270 + level * 14;
-  const headY = 528;
-  const head = t.identity[0] === 'anonymous helmet'
-    ? rect(cx - 82, headY - 82, 164, 170, faceFill, '#050606', 12, 34)
-    : `<ellipse cx="${cx}" cy="${headY}" rx="78" ry="92" fill="${faceFill}" stroke="#050606" stroke-width="10"/>`;
-  const outer = hood
-    ? p(`M${cx - 155} ${bodyY + 54}c22-210 74-314 155-314s133 104 155 314z`, hoodFill, '#050606', 12)
-    : p(`M${cx - bodyWidth / 2} ${bodyY + 70}c42-122 112-184 ${bodyWidth / 2}-184s178 62 ${bodyWidth / 2} 184z`, hoodFill, '#050606', 12);
+  const shadow = '#020303';
+  const headY = 542;
+  const trim = t.company.accent;
+  const suitMode = ['dark suit', 'luxury coat', 'trader vest', 'bomber jacket'].includes(t.clothing[0]);
+  const clothHighlight = suitMode ? '#111817' : '#183118';
+  const innerFace = p(`M${cx - 86} ${headY - 78}c42-38 130-38 172 0c28 46 22 120-10 168c-46 28-116 28-162 0c-32-48-38-122 0-168z`, '#030505', shadow, 10);
   const face = t.identity[0] === 'pixelated face'
-    ? `${rect(cx - 56, headY - 36, 34, 34, '#111', '#050606', 3)}${rect(cx - 8, headY - 26, 36, 34, t.company.accent, '#050606', 3, 0, 'opacity=".55"')}${rect(cx + 32, headY + 10, 28, 28, '#202626', '#050606', 3)}`
+    ? `${rect(cx - 66, headY - 30, 36, 30, '#101414', shadow, 3)}${rect(cx - 18, headY - 22, 40, 28, t.company.accent, shadow, 3, 0, 'opacity=".34"')}${rect(cx + 28, headY + 4, 34, 26, '#172120', shadow, 3)}`
     : t.identity[0] === 'bandana mask'
-      ? p(`M${cx - 66} ${headY + 18}h132l-22 58h-88z`, '#18110f', t.company.accent2, 5, 'opacity=".9"')
+      ? p(`M${cx - 74} ${headY + 26}h148l-32 58h-84z`, '#151010', t.company.accent2, 5, 'opacity=".74"')
       : t.identity[0].includes('reflection')
-        ? `${p(`M${cx - 68} ${headY - 16}h54l20 28h-70z`, '#0c1716', t.company.accent, 5, 'opacity=".9"')}${p(`M${cx + 14} ${headY - 16}h54l-4 28h-70z`, '#0c1716', t.company.accent, 5, 'opacity=".9"')}`
-        : line(cx - 48, headY - 10, cx + 48, headY - 10, t.company.accent, 8, .45);
-  const glasses = t.eyewear[0] === 'none' ? '' : `${rect(cx - 76, headY - 28, 58, 34, '#061010', t.company.accent, 5, 10, 'opacity=".92"')}${rect(cx + 18, headY - 28, 58, 34, '#061010', t.company.accent, 5, 10, 'opacity=".92"')}${line(cx - 18, headY - 10, cx + 18, headY - 10, t.company.accent, 5, .9)}`;
-  return `<ellipse cx="${cx}" cy="${bodyY + 230}" rx="${260 + level * 20}" ry="58" fill="#020303" opacity=".38"/>
-    ${outer}
-    ${p(`M${cx - bodyWidth / 2} ${bodyY + 50}c42-34 92-52 ${bodyWidth / 2}-52s${bodyWidth / 2 - 42} 18 ${bodyWidth / 2} 52l58 280H${cx - bodyWidth / 2 - 58}z`, hoodFill, '#050606', 12)}
-    ${p(`M${cx - 104} ${bodyY + 60}c38 42 170 42 208 0l-28 112H${cx - 76}z`, '#090d0d', '#050606', 7, 'opacity=".36"')}
-    ${line(cx - 54, bodyY + 80, cx - 74, bodyY + 240, t.company.accent, 5, .35)}${line(cx + 54, bodyY + 80, cx + 74, bodyY + 240, t.company.accent, 5, .35)}
-    ${line(cx - 22, bodyY + 18, cx - 44, bodyY + 142, t.company.warm, 4, .55)}${line(cx + 22, bodyY + 18, cx + 44, bodyY + 142, t.company.warm, 4, .55)}
-    ${head}${face}${glasses}
-    ${p(`M${cx - 230} ${bodyY + 170}c-88 66-126 132-130 214h156c20-90 62-145 126-168z`, hoodFill, '#050606', 12)}
-    ${p(`M${cx + 230} ${bodyY + 170}c88 66 126 132 130 214H${cx + 204}c-20-90-62-145-126-168z`, hoodFill, '#050606', 12)}`;
+        ? `${p(`M${cx - 76} ${headY - 18}h60l18 30h-76z`, '#081514', t.company.accent, 5, 'opacity=".72"')}${p(`M${cx + 16} ${headY - 18}h60l0 30h-76z`, '#081514', t.company.accent, 5, 'opacity=".72"')}`
+        : `${line(cx - 52, headY - 12, cx + 52, headY - 12, t.company.accent, 6, .34)}${line(cx - 28, headY + 34, cx + 28, headY + 34, '#111818', 6, .44)}`;
+  const glasses = t.eyewear[0] === 'none' ? '' : `${rect(cx - 86, headY - 30, 64, 34, '#061010', t.company.accent, 5, 6, 'opacity=".76"')}${rect(cx + 22, headY - 30, 64, 34, '#061010', t.company.accent, 5, 6, 'opacity=".76"')}${line(cx - 22, headY - 12, cx + 22, headY - 12, t.company.accent, 5, .64)}`;
+  const lapels = suitMode
+    ? `${p(`M${cx - 178} ${bodyY + 88}l108 324h-124l-74-270z`, '#070a0a', shadow, 8, 'opacity=".55"')}${p(`M${cx + 178} ${bodyY + 88}l-108 324h124l74-270z`, '#070a0a', shadow, 8, 'opacity=".55"')}${line(cx - 82, bodyY + 128, cx - 20, bodyY + 372, t.company.warm, 4, .28)}${line(cx + 82, bodyY + 128, cx + 20, bodyY + 372, t.company.warm, 4, .28)}`
+    : `${line(cx - 94, bodyY + 108, cx - 124, bodyY + 314, t.company.accent, 5, .24)}${line(cx + 94, bodyY + 108, cx + 124, bodyY + 314, t.company.accent, 5, .24)}${line(cx - 36, bodyY + 54, cx - 60, bodyY + 186, t.company.warm, 4, .26)}${line(cx + 36, bodyY + 54, cx + 60, bodyY + 186, t.company.warm, 4, .26)}`;
+  return `<ellipse cx="${cx}" cy="${bodyY + 276}" rx="332" ry="74" fill="${shadow}" opacity=".52"/>
+    ${p(`M${cx - 292} ${bodyY + 424}c22-164 92-292 196-360c58-38 134-58 196-58s138 20 196 58c104 68 174 196 196 360H${cx - 292}z`, hoodFill, shadow, 15)}
+    <path d="M${cx - 172} ${bodyY + 156}c46-44 104-66 172-66s126 22 172 66l48 250H${cx - 220}z" fill="#050808" opacity=".34"/>
+    ${p(`M${cx - 150} ${headY + 34}c0-144 62-262 150-272c88 10 150 128 150 272c-50-42-100-64-150-64s-100 22-150 64z`, hoodFill, shadow, 14)}
+    ${p(`M${cx - 112} ${headY - 28}c18-90 62-146 112-146s94 56 112 146c-58-30-166-30-224 0z`, '#0a0e0e', shadow, 8, 'opacity=".92"')}
+    ${innerFace}
+    <path d="M${cx - 74} ${headY - 92}c42-24 106-24 148 0" stroke="${trim}" stroke-width="5" stroke-linecap="round" opacity=".2" fill="none"/>
+    ${face}${glasses}
+    <path d="M${cx - 154} ${bodyY + 102}c36-26 86-42 154-42s118 16 154 42" stroke="${clothHighlight}" stroke-width="12" stroke-linecap="round" opacity=".42" fill="none"/>
+    ${lapels}
+    ${p(`M${cx - 242} ${bodyY + 300}c-96 32-166 86-218 162h190c32-42 82-72 150-90z`, hoodFill, shadow, 14)}
+    ${p(`M${cx + 242} ${bodyY + 300}c96 32 166 86 218 162H${cx + 270}c-32-42-82-72-150-90z`, hoodFill, shadow, 14)}`;
 }
 
 function itemSvg(kind, x, y, t) {

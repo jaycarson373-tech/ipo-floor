@@ -29,10 +29,6 @@
       "value": "cold cyan, segmented pixels"
     },
     {
-      "trait_type": "Terminal Layout",
-      "value": "signal grid"
-    },
-    {
       "trait_type": "Hood Detail",
       "value": "clean black"
     },

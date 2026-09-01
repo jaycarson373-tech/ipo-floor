@@ -23,7 +23,7 @@ test('collection contains 333 complete deterministic IDs', async () => {
     const rarity = metadata.attributes.find((item) => item.trait_type === 'Rarity')?.value;
     assert.ok(rarity in rarityScore, `${id} has a valid rarity`);
     assert.equal(metadata.image, `images/${id}.webp`);
-    for (const trait of ['Eye Glow', 'Terminal Layout', 'Hood Detail', 'Ambient Signature']) {
+    for (const trait of ['Eye Glow', 'Hood Detail', 'Ambient Signature']) {
       assert.ok(metadata.attributes.find((item) => item.trait_type === trait)?.value, `${id} has ${trait}`);
     }
     assert.match(metadata.properties.visual_signature, /^[A-F0-9]{8}$/);
@@ -43,7 +43,7 @@ test('collection contains 333 complete deterministic IDs', async () => {
 
 test('all five cinematic base stages exist and are non-empty', async () => {
   for (const stage of stages) {
-    const details = await stat(path.join(collection, 'bases', `${stage}.png`));
+    const details = await stat(path.join(collection, 'bases', `${stage}-v2.png`));
     assert.ok(details.size > 100_000, `${stage} artwork is present`);
   }
 });

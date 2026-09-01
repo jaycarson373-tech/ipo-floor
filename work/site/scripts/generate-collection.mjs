@@ -326,13 +326,10 @@ const eyeGlows = [
   { name: 'terminal green', color: '#b7ff36' },
   { name: 'cold cyan', color: '#55dfff' },
   { name: 'signal amber', color: '#ffd45c' },
-  { name: 'soft violet', color: '#aa94ff' },
-  { name: 'market red', color: '#ff6c72' },
   { name: 'ice white', color: '#dffcff' },
   { name: 'mint teal', color: '#54ffc8' },
 ];
 const eyeShapes = ['narrow slits', 'soft points', 'segmented pixels', 'angled reflection', 'low visor', 'asymmetric signal'];
-const terminalLayouts = ['order flow', 'price ladder', 'launch scanner', 'wallet trace', 'volume map', 'split tape', 'market depth', 'signal grid'];
 const hoodDetails = ['clean black', 'center zip', 'reflective piping', 'technical seam', 'chest stitch', 'shoulder panels'];
 const ambientSignatures = ['left monitor wash', 'right monitor wash', 'balanced screen glow', 'low desk bounce', 'overhead spill', 'blackout contrast'];
 
@@ -340,42 +337,10 @@ function visualIdentityFor(t) {
   return {
     eyeGlow: pick(eyeGlows, t.seed, 71),
     eyeShape: pick(eyeShapes, t.seed, 72),
-    terminalLayout: pick(terminalLayouts, t.seed, 73),
     hoodDetail: pick(hoodDetails, t.seed, 74),
     ambient: pick(ambientSignatures, t.seed, 75),
     signature: t.seed.toString(16).padStart(8, '0').toUpperCase(),
   };
-}
-
-function terminalPath(seed, salt, x, y, width, height) {
-  const points = Array.from({ length: 9 }, (_, index) => {
-    const value = hashNumber(`${seed}-${salt}-${index}`) % 1000;
-    return [x + (width * index) / 8, y + height - (value / 1000) * height];
-  });
-  return points.map(([px, py], index) => `${index ? 'L' : 'M'}${px.toFixed(1)} ${py.toFixed(1)}`).join(' ');
-}
-
-function terminalOverlay(t, visual) {
-  const c = t.company;
-  const leftChart = terminalPath(t.seed, 81, 64, 195, 244, 138);
-  const rightChart = terminalPath(t.seed, 82, 594, 201, 244, 132);
-  const barCount = 5 + (t.seed % 5);
-  const bars = Array.from({ length: barCount }, (_, index) => {
-    const height = 18 + (hashNumber(`${t.seed}-bar-${index}`) % 62);
-    const x = 619 + index * (184 / barCount);
-    return `<rect x="${x.toFixed(1)}" y="${(368 - height).toFixed(1)}" width="${Math.max(5, 13 - barCount / 2).toFixed(1)}" height="${height}" rx="2" fill="${index % 3 === 0 ? c.accent2 : c.accent}" opacity=".16"/>`;
-  }).join('');
-  const cells = Array.from({ length: 12 }, (_, index) => {
-    const active = (hashNumber(`${t.seed}-cell-${index}`) % 4) !== 0;
-    const x = 83 + (index % 6) * 34;
-    const y = 365 + Math.floor(index / 6) * 18;
-    return `<rect x="${x}" y="${y}" width="${active ? 20 : 10}" height="4" rx="2" fill="${index % 2 ? c.accent : visual.eyeGlow.color}" opacity="${active ? '.18' : '.09'}"/>`;
-  }).join('');
-  return `<g aria-label="${visual.terminalLayout}" opacity=".9">
-    <path d="${leftChart}" fill="none" stroke="${c.accent}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity=".22"/>
-    <path d="${rightChart}" fill="none" stroke="${visual.eyeGlow.color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".18"/>
-    ${bars}${cells}
-  </g>`;
 }
 
 function ambientOverlay(visual) {
@@ -450,7 +415,6 @@ function overlayFor(serial, level) {
   </defs>
   <rect width="900" height="900" fill="url(#marketTint)"/>
   ${ambientOverlay(visual)}
-  ${terminalOverlay(t, visual)}
   ${hoodOverlay(visual, t)}
   ${eyeOverlay(visual, t.seed)}
   <g filter="url(#shadow)">
@@ -467,7 +431,7 @@ await mkdir(metadataDir, { recursive: true });
 
 const stageImages = new Map();
 for (const stage of visualStages) {
-  const source = await readFile(new URL(`../public/collection/bases/${stage.slug}.png`, import.meta.url));
+  const source = await readFile(new URL(`../public/collection/bases/${stage.slug}-v2.png`, import.meta.url));
   stageImages.set(stage.slug, await sharp(source).resize(900, 900, { fit: 'cover' }).toBuffer());
 }
 
@@ -499,7 +463,6 @@ async function generateInsider(serial) {
       { trait_type: 'Face / Identity', value: 'complete shadow' },
       { trait_type: 'Eyewear', value: 'none' },
       { trait_type: 'Eye Glow', value: `${visual.eyeGlow.name}, ${visual.eyeShape}` },
-      { trait_type: 'Terminal Layout', value: visual.terminalLayout },
       { trait_type: 'Hood Detail', value: visual.hoodDetail },
       { trait_type: 'Ambient Signature', value: visual.ambient },
       { trait_type: 'Desk', value: baseVisual.desk },
@@ -543,7 +506,6 @@ await writeFile(new URL('manifest.json', outDir), `${JSON.stringify({
     'Face / Identity',
     'Eyewear',
     'Eye Glow',
-    'Terminal Layout',
     'Hood Detail',
     'Ambient Signature',
     'Desk',

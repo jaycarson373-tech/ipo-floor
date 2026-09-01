@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'IPO',
-  description: 'Mint IPO desk Metaplex Core NFTs, upgrade broker levels, and access launchpad priority allocations.',
+  title: 'IPO Floor',
+  description: '333 anonymous insider desks across three IPO markets, built around a 3.3% holder-priority pool.',
 };
 
 export default function RootLayout({
@@ -28,7 +28,6 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-        <script src="/launch-controls.js" defer />
       </body>
     </html>
   );

@@ -1,8 +1,8 @@
 {
   "name": "IPO Floor Insider ANTH-165",
   "symbol": "IPO",
-  "description": "An anonymous IPO Floor insider at a trading desk. Metaplex Core NFT for Initial Pump Offering access, upgrades, rentals, and launchpad priority.",
-  "image": "images/ANTH-165.svg",
+  "description": "An anonymous IPO Floor insider at a trading desk. Part of a planned 333-piece Metaplex Core collection for Initial Pump Offering.",
+  "image": "images/ANTH-165.webp",
   "attributes": [
     {
       "trait_type": "Company Track",
@@ -14,11 +14,11 @@
     },
     {
       "trait_type": "Hood / Clothing",
-      "value": "grey hoodie"
+      "value": "black technical hoodie"
     },
     {
       "trait_type": "Face / Identity",
-      "value": "balaclava"
+      "value": "complete shadow"
     },
     {
       "trait_type": "Eyewear",
@@ -26,23 +26,23 @@
     },
     {
       "trait_type": "Desk",
-      "value": "cheap wooden desk"
+      "value": "basic black desk"
     },
     {
       "trait_type": "Monitor Configuration",
-      "value": "laptop"
+      "value": "dual monitor"
     },
     {
       "trait_type": "Room",
-      "value": "basement"
+      "value": "bedroom desk"
     },
     {
       "trait_type": "Screen Content",
-      "value": "Pump.fun feed"
+      "value": "charts and order book"
     },
     {
       "trait_type": "Desk Items",
-      "value": "energy drink, notebook, multiple phones, confidential folder"
+      "value": "coffee"
     },
     {
       "trait_type": "Lighting",
@@ -50,7 +50,7 @@
     },
     {
       "trait_type": "Background",
-      "value": "plain office"
+      "value": "bedroom desk"
     },
     {
       "trait_type": "Special Trait",
@@ -58,7 +58,7 @@
     },
     {
       "trait_type": "Access / Status Visual",
-      "value": "floor pass"
+      "value": "level-driven workstation"
     },
     {
       "trait_type": "Upgrade Statuses",
@@ -73,55 +73,55 @@
     "category": "image",
     "files": [
       {
-        "uri": "images/ANTH-165.svg",
-        "type": "image/svg+xml"
+        "uri": "images/ANTH-165.webp",
+        "type": "image/webp"
       },
       {
-        "uri": "images/ANTH-165-L1.svg",
-        "type": "image/svg+xml"
+        "uri": "images/ANTH-165-L1.webp",
+        "type": "image/webp"
       },
       {
-        "uri": "images/ANTH-165-L2.svg",
-        "type": "image/svg+xml"
+        "uri": "images/ANTH-165-L2.webp",
+        "type": "image/webp"
       },
       {
-        "uri": "images/ANTH-165-L3.svg",
-        "type": "image/svg+xml"
+        "uri": "images/ANTH-165-L3.webp",
+        "type": "image/webp"
       },
       {
-        "uri": "images/ANTH-165-L4.svg",
-        "type": "image/svg+xml"
+        "uri": "images/ANTH-165-L4.webp",
+        "type": "image/webp"
       },
       {
-        "uri": "images/ANTH-165-L5.svg",
-        "type": "image/svg+xml"
+        "uri": "images/ANTH-165-L5.webp",
+        "type": "image/webp"
       }
     ],
     "upgrade_images": [
       {
         "level": 1,
         "status": "Intern",
-        "uri": "images/ANTH-165-L1.svg"
+        "uri": "images/ANTH-165-L1.webp"
       },
       {
         "level": 2,
         "status": "Analyst",
-        "uri": "images/ANTH-165-L2.svg"
+        "uri": "images/ANTH-165-L2.webp"
       },
       {
         "level": 3,
         "status": "Trader",
-        "uri": "images/ANTH-165-L3.svg"
+        "uri": "images/ANTH-165-L3.webp"
       },
       {
         "level": 4,
         "status": "Insider",
-        "uri": "images/ANTH-165-L4.svg"
+        "uri": "images/ANTH-165-L4.webp"
       },
       {
         "level": 5,
         "status": "Partner",
-        "uri": "images/ANTH-165-L5.svg"
+        "uri": "images/ANTH-165-L5.webp"
       }
     ],
     "seed": "ipo-floor-insider-165"

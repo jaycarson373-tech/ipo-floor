@@ -2,7 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element */
 
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import type { CSSProperties } from 'react';
 import { launchConfig } from './launch-config';
 
@@ -15,503 +15,272 @@ declare global {
   }
 }
 
-const MINT_SOL = launchConfig.mintPriceSol;
-const MINT_IPO = launchConfig.mintPriceIpo;
-const STARTING_SOL = 0;
-const STARTING_IPO = 25_000_000;
-const STARTING_WALLET_SOL = 4.25;
-const TOTAL_SUPPLY = launchConfig.supply;
-
 const insiderSamples = [
-  {
-    id: 'GTA-001',
-    company: 'GTA',
-    rarity: 'Common',
-    level: 1,
-    spec: 'hooded degen at a basic IPO desk',
-    environment: 'bedroom terminal glow',
-  },
-  {
-    id: 'GTA-181',
-    company: 'GTA',
-    rarity: 'Uncommon',
-    level: 2,
-    spec: 'masked analyst with upgraded screens',
-    environment: 'private launch office',
-  },
-  {
-    id: 'NLNK-251',
-    company: 'Neuralink',
-    rarity: 'Rare',
-    level: 3,
-    spec: 'anonymous trader inside a lab setup',
-    environment: 'server-lit research floor',
-  },
-  {
-    id: 'GTA-319',
-    company: 'GTA',
-    rarity: 'Epic',
-    level: 4,
-    spec: 'shadowed insider at an elite workstation',
-    environment: 'trading floor',
-  },
-  {
-    id: 'NLNK-332',
-    company: 'Neuralink',
-    rarity: 'Mythic',
-    level: 5,
-    spec: 'anonymous whale in a command setup',
-    environment: 'server-lit office',
-  },
-  {
-    id: 'ANTH-333',
-    company: 'Anthropic',
-    rarity: 'Mythic',
-    level: 5,
-    spec: 'partner-level insider with full floor access',
-    environment: 'high-rise strategy floor',
-  },
+  { id: 'GTA-001', market: 'GTA', rarity: 'Common', level: 1, environment: 'Bedroom desk' },
+  { id: 'GTA-181', market: 'GTA', rarity: 'Uncommon', level: 2, environment: 'Private office' },
+  { id: 'NLNK-251', market: 'NLNK', rarity: 'Rare', level: 3, environment: 'Institutional room' },
+  { id: 'GTA-319', market: 'GTA', rarity: 'Epic', level: 4, environment: 'Elite trading floor' },
+  { id: 'NLNK-332', market: 'NLNK', rarity: 'Mythic', level: 5, environment: 'Executive command center' },
+  { id: 'ANTH-333', market: 'ANTH', rarity: 'Mythic', level: 5, environment: 'Executive command center' },
 ];
 
-const launchCosts = [
-  ['Mint site', '$0-$25 to start', 'Static hosting can be free or cheap. A custom domain usually adds about $10-$20/year.'],
-  ['Core NFT minting', '~0.97-1.23 SOL', 'For 333 Metaplex Core assets, mint rent is still cheap while each desk behaves like a normal NFT.'],
-  ['Buyer mint', '0.25 SOL + 1,000,000 IPO', 'Buyer also pays normal Solana transaction fees, usually tiny compared with the mint price.'],
-  ['Treasury sellout', '83.25 SOL', 'The treasury starts at 0 SOL from mint sales and reaches 83.25 SOL if all 333 desks sell at 0.25 SOL.'],
-];
-
-const desks = [
-  {
-    ticker: 'GTA',
-    name: 'GTA Desk',
-    accent: '#bbff34',
-    feed: 'game economy routes',
-    market: 'entertainment IPO desk',
-    seed: 'ipo:gta:vice-market',
-  },
-  {
-    ticker: 'NLNK',
-    name: 'Neuralink Desk',
-    accent: '#42d8ff',
-    feed: 'neuro hardware queue',
-    market: 'deep tech IPO desk',
-    seed: 'ipo:neuralink:synapse-line',
-  },
-  {
-    ticker: 'ANTH',
-    name: 'Anthropic Desk',
-    accent: '#ffca3a',
-    feed: 'AI launch allocation',
-    market: 'frontier AI IPO desk',
-    seed: 'ipo:anthropic:context-window',
-  },
+const markets = [
+  { ticker: 'GTA', name: 'GTA', description: 'Entertainment / gaming market', accent: '#bbff34', sample: 'GTA-001' },
+  { ticker: 'NLNK', name: 'NEURALINK', description: 'Deep-tech market', accent: '#42d8ff', sample: 'NLNK-002' },
+  { ticker: 'ANTH', name: 'ANTHROPIC', description: 'Frontier-AI market', accent: '#ffca3a', sample: 'ANTH-003' },
 ];
 
 const upgrades = [
-  ['Lead Sheet', 150_000, 0.03, '+1 allocation point'],
-  ['Cold Caller', 250_000, 0.04, '+2 renter slots'],
-  ['Pitch Deck', 400_000, 0.06, '+3 round priority'],
-  ['KYC Desk', 650_000, 0.08, '+1 launchpad queue skip'],
-  ['Broker License', 1_000_000, 0.11, '+5 allocation points'],
-  ['Treasury Line', 1_500_000, 0.15, '+3 revenue weight'],
-  ['Market Maker', 2_250_000, 0.21, '+8 renter yield weight'],
-  ['Bookrunner', 3_300_000, 0.3, '+12 launch priority'],
-  ['Syndicate Room', 4_800_000, 0.42, '+18 allocation points'],
-  ['Bell Ring', 7_000_000, 0.6, 'max desk status'],
+  ['L1', 'Current level', '1.00x'],
+  ['L2', '150,000 IPO + 0.03 SOL', '1.35x'],
+  ['L3', '250,000 IPO + 0.04 SOL', '1.70x'],
+  ['L4', '400,000 IPO + 0.06 SOL', '2.05x'],
+  ['L5', '650,000 IPO + 0.08 SOL', '2.40x'],
+  ['L6', '1,000,000 IPO + 0.11 SOL', '2.75x'],
+  ['L7', '1,500,000 IPO + 0.15 SOL', '3.10x'],
+  ['L8', '2,250,000 IPO + 0.21 SOL', '3.45x'],
+  ['L9', '3,300,000 IPO + 0.30 SOL', '3.80x'],
+  ['L10', '4,800,000 IPO + 0.42 SOL', '4.15x'],
 ] as const;
 
-const docs = [
-  ['Mint', 'Pay 0.25 SOL and lock 1,000,000 IPO into the desk. The NFT is issued as the desk receipt.'],
-  ['Rounds', 'The mint funds the treasury as desks sell. Launches use stockbroker-style rounds, with holder priority before public access.'],
-  ['Launchpad', 'Teams submit, complete KYC, and book a call with the team. Tokens launching through the launchpad get priority.'],
-  ['Allocation', 'Every launch reserves a 3.3% holder priority pool for desk NFTs. Upgrades decide weight inside that pool.'],
+const launchSteps = [
+  'Project applies',
+  'Project review / KYC',
+  'Token launches',
+  '3.3% holder pool',
+  'Desk holders receive priority based on level',
 ];
-
-function artLevelFromUpgrade(upgradeLevel: number) {
-  return Math.min(5, Math.floor(upgradeLevel / 2) + 1);
-}
-
-function sampleIdForTicker(ticker: string) {
-  if (ticker === 'NLNK') return 'NLNK-002';
-  if (ticker === 'ANTH') return 'ANTH-003';
-  return 'GTA-001';
-}
 
 function InsiderCard({ desk }: { desk: (typeof insiderSamples)[number] }) {
   return (
     <article className="nftCard">
       <img
-        alt={`${desk.rarity} ${desk.company} IPO Floor anonymous insider ${desk.id}`}
+        alt={`${desk.rarity} ${desk.market} IPO Floor anonymous insider ${desk.id}`}
         className="nftImage"
-        src={`/collection/images/${desk.id}-L${desk.level}.svg`}
+        src={`/collection/images/${desk.id}-L${desk.level}.webp`}
       />
       <div className="nftMeta">
         <span>{desk.rarity}</span>
         <h3>{desk.id}</h3>
-        <p>{desk.spec}</p>
-        <small>{desk.environment} · Level {desk.level}</small>
+        <p>{desk.environment}</p>
+        <small>Anonymous insider · Art stage {desk.level}</small>
       </div>
     </article>
   );
 }
 
-function formatNumber(value: number) {
-  return new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(value);
-}
-
-function makeDeskId(ticker: string, minted: number) {
-  return `${ticker}-${String(334 - minted).padStart(3, '0')}`;
-}
-
 export default function Home() {
+  const [selectedMarket, setSelectedMarket] = useState(markets[0]);
+  const [walletLabel, setWalletLabel] = useState('Not connected');
   const [connected, setConnected] = useState(false);
-  const [selectedDesk, setSelectedDesk] = useState(desks[0]);
-  const [remaining, setRemaining] = useState(TOTAL_SUPPLY);
-  const [ipoBalance, setIpoBalance] = useState(STARTING_IPO);
-  const [solBalance, setSolBalance] = useState(STARTING_WALLET_SOL);
-  const [walletLabel, setWalletLabel] = useState('not connected');
-  const [treasury, setTreasury] = useState(STARTING_SOL);
-  const [ownedDesk, setOwnedDesk] = useState<string | null>(null);
-  const [upgradeLevel, setUpgradeLevel] = useState(0);
-  const [rentalDays, setRentalDays] = useState(7);
-  const [rentPrice, setRentPrice] = useState(0.018);
   const [log, setLog] = useState([
-    '$ ipo mint --desk GTA --ipo 1000000 --sol 0.25',
-    '> connect wallet to open the book',
+    '$ ipo floor status',
+    '> wallet connection............ live',
+    '> on-chain mint................ coming soon',
+    '> desk rentals................. coming soon',
   ]);
 
-  const canMint = connected && remaining > 0 && ipoBalance >= MINT_IPO && solBalance >= MINT_SOL;
-  const nextUpgrade = upgrades[upgradeLevel];
-  const canUpgrade =
-    Boolean(ownedDesk && nextUpgrade) &&
-    ipoBalance >= (nextUpgrade?.[1] ?? Infinity) &&
-    solBalance >= (nextUpgrade?.[2] ?? Infinity);
-
-  const allocationWeight = useMemo(() => 1 + upgradeLevel * 0.35, [upgradeLevel]);
-  const displayedArtLevel = artLevelFromUpgrade(upgradeLevel);
-  const ownedArtId = ownedDesk ?? sampleIdForTicker(selectedDesk.ticker);
-
   async function connectWallet() {
-    let label = 'IPO-holder.demo';
-    if (typeof window !== 'undefined' && window.solana) {
-      try {
-        const response = await window.solana.connect();
-        const publicKey = response.publicKey.toString();
-        label = `${publicKey.slice(0, 4)}...${publicKey.slice(-4)}`;
-      } catch {
-        label = 'IPO-holder.demo';
-      }
-    }
-
-    setConnected(true);
-    setWalletLabel(label);
-    setLog([
-      '$ wallet connect',
-      `> wallet found................ ${label}`,
-      `> balances.................... ${formatNumber(ipoBalance)} IPO / ${solBalance.toFixed(2)} SOL`,
-      '> mint desk ready',
-    ]);
-  }
-
-  function mintDesk() {
-    if (!canMint) {
+    if (typeof window === 'undefined' || !window.solana) {
       setLog([
-        `$ ipo mint --desk ${selectedDesk.ticker} --ipo 1000000 --sol 0.25`,
-        connected ? '> insufficient balance or sold out' : '> wallet required',
+        '$ wallet connect',
+        '> Solana wallet not found',
+        '> install or open a compatible wallet, then retry',
       ]);
       return;
     }
 
-    const deskId = makeDeskId(selectedDesk.ticker, remaining);
-    setRemaining((value) => value - 1);
-    setIpoBalance((value) => value - MINT_IPO);
-    setSolBalance((value) => Number((value - MINT_SOL).toFixed(3)));
-    setTreasury((value) => Number((value + MINT_SOL).toFixed(3)));
-    setOwnedDesk(deskId);
-    setUpgradeLevel(0);
-    setLog([
-      `$ ipo mint --desk ${selectedDesk.ticker} --ipo 1000000 --sol 0.25`,
-      '> charging wallet............. 0.25 SOL',
-      '> locking IPO................. 1,000,000 IPO',
-      `> metaplex core asset......... ${deskId}`,
-      `> treasury.................... ${(treasury + MINT_SOL).toFixed(2)} SOL`,
-      '> status...................... minted',
-    ]);
-  }
-
-  function upgradeDesk() {
-    if (!canUpgrade || !nextUpgrade || !ownedDesk) {
+    try {
+      const response = await window.solana.connect();
+      const publicKey = response.publicKey.toString();
+      const label = `${publicKey.slice(0, 4)}...${publicKey.slice(-4)}`;
+      setConnected(true);
+      setWalletLabel(label);
       setLog([
-        '$ ipo desk upgrade',
-        ownedDesk ? '> not enough IPO or SOL for next upgrade' : '> mint a desk first',
+        '$ wallet connect',
+        `> wallet...................... ${label}`,
+        '> connection.................. live',
+        '> on-chain mint............... coming soon',
       ]);
-      return;
+    } catch {
+      setConnected(false);
+      setWalletLabel('Not connected');
+      setLog(['$ wallet connect', '> connection cancelled']);
     }
-
-    setIpoBalance((value) => value - nextUpgrade[1]);
-    setSolBalance((value) => Number((value - nextUpgrade[2]).toFixed(3)));
-    setTreasury((value) => Number((value + nextUpgrade[2]).toFixed(3)));
-    setUpgradeLevel((value) => value + 1);
-    setLog([
-      `$ ipo upgrade --desk ${ownedDesk} --level ${upgradeLevel + 1}`,
-      `> upgrade..................... ${nextUpgrade[0]}`,
-      `> IPO spent................... ${formatNumber(nextUpgrade[1])}`,
-      `> SOL fee..................... ${nextUpgrade[2].toFixed(2)}`,
-      `> perk........................ ${nextUpgrade[3]}`,
-      '> status...................... upgraded',
-    ]);
-  }
-
-  function createRental() {
-    if (!ownedDesk) {
-      setLog(['$ ipo rent create', '> mint a desk before listing rentals']);
-      return;
-    }
-
-    setLog([
-      `$ ipo rent create --desk ${ownedDesk} --days ${rentalDays} --price ${rentPrice.toFixed(3)}`,
-      '> checking owner.............. ok',
-      `> renter access............... ${selectedDesk.feed}`,
-      `> lease total................. ${(rentalDays * rentPrice).toFixed(3)} SOL`,
-      `> lease url................... desk://${ownedDesk}/rent/${rentalDays}d`,
-      '> status...................... listed',
-    ]);
   }
 
   return (
     <main>
       <nav className="topbar" aria-label="Primary">
-        <a className="brand" href="#mint" aria-label="IPO home">
+        <a className="brand" href="#mint" aria-label="IPO Floor home">
           <span className="brandMark" />
           IPO
         </a>
         <div className="navLinks">
           <a href="#mint">Mint</a>
-          <a href="#art">Art</a>
-          <a href="#costs">Costs</a>
-          <a href="#upgrades">Upgrades</a>
-          <a href="#market">Market</a>
+          <a href="#priority">Allocation</a>
+          <a href="#markets">Markets</a>
+          <a href="#collection">Art</a>
+          <a href="#levels">Levels</a>
+          <a href="#launchpad">Launchpad</a>
+          <a href="/docs">Docs</a>
           <a href="#terminal">Terminal</a>
         </div>
       </nav>
 
       <section className="hero" id="mint">
         <div className="heroCopy">
-          <p className="eyebrow">333 Metaplex Core desks · 3 IPO markets · holder priority</p>
-          <h1>Mint the desk before the book opens.</h1>
-          <p className="lede">
-            Pay 0.25 SOL and lock 1,000,000 IPO to mint one broker desk. Holders
-            get priority allocation for every launchpad token, then upgrade their
-            desk through ten heavy levels.
+          <p className="eyebrow">Initial Pump Offering</p>
+          <h1>OWN THE IPO FLOOR.</h1>
+          <p className="heroPromise">
+            333 insider desks.<br />
+            Three markets.<br />
+            Priority access to every launch.
           </p>
-          <div className="actions">
-            <button id="connectOrMintButton" className="primaryBtn" type="button" onClick={connected ? mintDesk : connectWallet}>
-              {connected ? 'Mint desk' : 'Connect wallet'}
-            </button>
-            <a className="ghostBtn" href="#market">Launchpad rules</a>
+          <div className="heroCosts" aria-label="Mint costs">
+            <span><small>Mint</small>0.25 SOL</span>
+            <span><small>Lock</small>1,000,000 $IPO</span>
           </div>
+          <div className="actions">
+            <button className="primaryBtn" type="button" onClick={connectWallet}>
+              {connected ? `Connected ${walletLabel}` : 'CONNECT TO MINT'}
+            </button>
+          </div>
+          <p className="statusNote">Wallet connection is live. On-chain mint transaction: coming soon.</p>
         </div>
 
-        <div className="mintPanel" aria-label="Mint panel">
+        <div className="mintPanel" aria-label="Mint preview">
           <div className="panelHeader">
             <span>mint book</span>
-            <strong id="remainingSupply">{remaining} left</strong>
+            <strong>{launchConfig.supply} desks</strong>
           </div>
-          <dl className="stats">
-            <div>
-              <dt>Mint price</dt>
-              <dd>0.25 SOL</dd>
-            </div>
-            <div>
-              <dt>IPO lock</dt>
-              <dd>1,000,000 IPO</dd>
-            </div>
-            <div>
-              <dt>Treasury</dt>
-              <dd id="treasuryValue">{treasury.toFixed(2)} SOL</dd>
-            </div>
-            <div>
-              <dt>Your wallet</dt>
-              <dd id="walletLabel">{connected ? walletLabel : 'not connected'}</dd>
-            </div>
-          </dl>
-          <div className="selector" role="group" aria-label="Choose desk">
-            {desks.map((desk) => (
+          <div className="selector" role="group" aria-label="Choose market">
+            {markets.map((market) => (
               <button
-                key={desk.ticker}
-                className={desk.ticker === selectedDesk.ticker ? 'selected' : ''}
-                data-desk-feed={desk.feed}
-                data-desk-name={desk.name}
-                data-desk-ticker={desk.ticker}
+                key={market.ticker}
+                className={market.ticker === selectedMarket.ticker ? 'selected' : ''}
                 type="button"
-                onClick={() => setSelectedDesk(desk)}
+                onClick={() => setSelectedMarket(market)}
               >
-                {desk.ticker}
+                {market.ticker}
               </button>
             ))}
           </div>
           <img
-            alt={`${selectedDesk.name} IPO Floor insider preview`}
+            alt={`${selectedMarket.name} IPO Floor insider preview`}
             className="mintNftPreview"
-            id="mintNftPreview"
-            src={`/collection/images/${sampleIdForTicker(selectedDesk.ticker)}-L1.svg`}
+            src={`/collection/images/${selectedMarket.sample}-L1.webp`}
           />
-          <button className="mintButton" id="mintButton" type="button" onClick={mintDesk}>
-            Mint {selectedDesk.name}
-          </button>
+          <dl className="stats compactStats">
+            <div><dt>Mint</dt><dd>0.25 SOL</dd></div>
+            <div><dt>IPO lock</dt><dd>1,000,000 $IPO</dd></div>
+          </dl>
+          <button className="mintButton isDisabled" type="button" disabled>Mint coming soon</button>
+          <small className="feeNote">Normal network fees may apply.</small>
         </div>
       </section>
 
-      <section className="artBand" id="art" aria-labelledby="art-title">
-        <div className="sectionHead">
-          <p className="eyebrow">Metaplex Core art</p>
-          <h2 id="art-title">Anonymous IPO insiders</h2>
+      <section className="priorityBand" id="priority" aria-labelledby="priority-title">
+        <div className="priorityCopy">
+          <p className="eyebrow">Holder priority</p>
+          <h2 id="priority-title">EVERY LAUNCH.<br />DESK HOLDERS FIRST.</h2>
+          <p>Every IPO Floor launch reserves 3.3% for desk holders.</p>
+          <p>Your desk level determines your weight inside the holder allocation.</p>
         </div>
-        <div className="nftGrid">
-          {insiderSamples.map((desk) => (
-            <InsiderCard desk={desk} key={desk.id} />
-          ))}
+        <div className="priorityMetric" aria-label="Holder allocation pool">
+          <strong>3.3%</strong>
+          <span>holder priority pool</span>
+        </div>
+        <div className="mechanicLine" aria-label="Holder progression">
+          <span>MINT</span><b>→</b><span>LEVEL UP</span><b>→</b><span>INCREASE ALLOCATION WEIGHT</span>
         </div>
       </section>
 
-      <section className="deskBand" id="desks" aria-labelledby="desk-title">
+      <section className="deskBand" id="markets" aria-labelledby="market-title">
         <div className="sectionHead">
-          <p className="eyebrow">Pick 1 of 3</p>
-          <h2 id="desk-title">IPO desks</h2>
+          <div><p className="eyebrow">Three IPO markets</p><h2 id="market-title">Choose your desk.</h2></div>
         </div>
-        <div className="deskGrid">
-          {desks.map((desk, index) => (
-            <article className="deskCard" key={desk.ticker}>
-              <div className="cardArt" style={{ '--accent': desk.accent } as CSSProperties}>
-                <span className="serial">#{String(index + 1).padStart(3, '0')}</span>
-                <span className="ticker">{desk.ticker}</span>
+        <div className="deskGrid marketScroller">
+          {markets.map((market, index) => (
+            <article className="deskCard" key={market.ticker}>
+              <div className="cardArt" style={{ '--accent': market.accent } as CSSProperties}>
+                <span className="serial">MARKET {String(index + 1).padStart(2, '0')}</span>
+                <span className="ticker">{market.ticker}</span>
                 <span className="plug" />
               </div>
-              <h3>{desk.name}</h3>
-              <p>{desk.market}</p>
-              <div className="miniRows">
-                <span>unique utility</span>
-                <strong>{desk.feed}</strong>
-              </div>
-              <code>{desk.seed}</code>
+              <h3>{market.name}</h3>
+              <p>{market.description}</p>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="costBand" id="costs" aria-labelledby="cost-title">
+      <section className="artBand" id="collection" aria-labelledby="art-title">
         <div className="sectionHead">
-          <p className="eyebrow">Cheap to run</p>
-          <h2 id="cost-title">Mint costs</h2>
+          <div><p className="eyebrow">Insider collection</p><h2 id="art-title">333 anonymous insiders.</h2></div>
         </div>
-        <div className="costGrid">
-          {launchCosts.map(([title, amount, body]) => (
-            <article className="costCard" key={title}>
-              <span>{title}</span>
-              <strong>{amount}</strong>
-              <p>{body}</p>
-            </article>
-          ))}
+        <div className="nftGrid">
+          {insiderSamples.map((desk) => <InsiderCard desk={desk} key={desk.id} />)}
         </div>
       </section>
 
-      <section className="upgradeBand" id="upgrades" aria-labelledby="upgrade-title">
+      <section className="upgradeBand" id="levels" aria-labelledby="level-title">
         <div className="sectionHead">
-          <p className="eyebrow">10 heavy upgrades</p>
-          <h2 id="upgrade-title">Level the desk</h2>
+          <div><p className="eyebrow">Ten levels</p><h2 id="level-title">Level determines allocation weight.</h2></div>
+          <a className="ghostBtn" href="/docs#levels">Detailed costs in Docs</a>
         </div>
-        <div className="upgradeLayout">
-          <div className="upgradeStatus">
-            <img
-              alt={`Current IPO Floor desk art level ${displayedArtLevel}`}
-              className="upgradePreview"
-              id="upgradePreview"
-              src={`/collection/images/${ownedArtId}-L${displayedArtLevel}.svg`}
-            />
-            <span>Current desk</span>
-            <strong id="currentDesk">{ownedDesk ?? 'Mint first'}</strong>
-            <span>Level</span>
-            <strong id="upgradeLevel">{upgradeLevel}/10</strong>
-            <span>Allocation weight</span>
-            <strong id="allocationWeight">{allocationWeight.toFixed(2)}x</strong>
-            <button id="upgradeButton" type="button" onClick={upgradeDesk}>
-              Upgrade next level
-            </button>
-          </div>
-          <div className="upgradeGrid">
-            {upgrades.map(([name, ipoCost, solCost, perk], index) => (
-              <article className={index < upgradeLevel ? 'upgrade done' : 'upgrade'} data-upgrade-index={index} key={name}>
-                <span>{index + 1}</span>
-                <h3>{name}</h3>
-                <p>{formatNumber(ipoCost)} IPO + {solCost.toFixed(2)} SOL</p>
-                <small>{perk}</small>
-              </article>
-            ))}
-          </div>
+        <div className="levelTrack" aria-label="Level progression">
+          {upgrades.map(([level]) => <span key={level}>{level}</span>)}
         </div>
+        <div className="levelStats">
+          <div><small>Current level</small><strong>BASE</strong></div>
+          <div><small>Next upgrade cost</small><strong>L1 · 150,000 IPO + 0.03 SOL</strong></div>
+          <div><small>Allocation weight</small><strong>1.00x</strong></div>
+          <div><small>Max level</small><strong>L10</strong></div>
+        </div>
+        <p className="statusNote darkNote">On-chain level upgrades are coming soon. Economics are unchanged.</p>
       </section>
 
-      <section className="docs" id="market" aria-labelledby="market-title">
+      <section className="launchBand" id="launchpad" aria-labelledby="launch-title">
         <div className="sectionHead">
-          <p className="eyebrow">Future IPO marketplace</p>
-          <h2 id="market-title">Launchpad priority</h2>
+          <div><p className="eyebrow">How a launch works</p><h2 id="launch-title">From application to holder pool.</h2></div>
         </div>
-        <div className="docList">
-          {docs.map(([title, body], index) => (
-            <article key={title} className="docRow">
+        <div className="launchFlow">
+          {launchSteps.map((step, index) => (
+            <div className="launchStep" key={step}>
               <span>{String(index + 1).padStart(2, '0')}</span>
-              <div>
-                <h3>{title}</h3>
-                <p>{body}</p>
-              </div>
-            </article>
+              <strong>{step}</strong>
+              {index < launchSteps.length - 1 ? <b aria-hidden="true">↓</b> : null}
+            </div>
           ))}
+        </div>
+        <p className="statusNote">Launchpad applications and token launches are coming soon. No allocation is guaranteed.</p>
+      </section>
+
+      <section className="comingBand" aria-labelledby="coming-title">
+        <div className="sectionHead">
+          <div><p className="eyebrow">Coming soon</p><h2 id="coming-title">Next on the floor.</h2></div>
+        </div>
+        <div className="comingGrid">
+          <article><span>COMING SOON</span><h3>On-chain mint</h3><p>Metaplex Core mint transaction and $IPO lock.</p></article>
+          <article><span>COMING SOON</span><h3>Level upgrades</h3><p>On-chain level progression and allocation weights.</p></article>
+          <article><span>COMING SOON</span><h3>Desk rentals</h3><p>Rentals are not currently functional.</p></article>
+          <article><span>COMING SOON</span><h3>Launchpad</h3><p>Project applications, review, KYC, and holder rounds.</p></article>
         </div>
       </section>
 
       <section className="terminalWrap" id="terminal" aria-labelledby="terminal-title">
         <div className="terminalIntro">
-          <p className="eyebrow">Rental utility</p>
-          <h2 id="terminal-title">Rent desks without selling them.</h2>
-          <p>
-            Set the term and daily price. Renters get the active utility window,
-            while the holder keeps the NFT and launchpad allocation.
-          </p>
-          <div className="rentControls">
-            <label>
-              Days
-              <input
-                min="1"
-                max="30"
-                id="rentalDaysInput"
-                type="number"
-                value={rentalDays}
-                onChange={(event) => setRentalDays(Number(event.target.value))}
-              />
-            </label>
-            <label>
-              SOL / day
-              <input
-                min="0.001"
-                step="0.001"
-                id="rentPriceInput"
-                type="number"
-                value={rentPrice}
-                onChange={(event) => setRentPrice(Number(event.target.value))}
-              />
-            </label>
-            <button id="rentalButton" type="button" onClick={createRental}>
-              List rental
-            </button>
-          </div>
+          <p className="eyebrow">IPO terminal</p>
+          <h2 id="terminal-title">Open the floor.</h2>
+          <p>Connect a Solana wallet to enter the terminal. Minting opens when the on-chain transaction path is live.</p>
+          <button className="primaryBtn" type="button" onClick={connectWallet}>
+            {connected ? `Connected ${walletLabel}` : 'CONNECT WALLET'}
+          </button>
         </div>
-        <div className="terminal" role="region" aria-label="Desk terminal">
-          <div className="terminalChrome">
-            <span />
-            <span />
-            <span />
-          </div>
-          <pre id="terminalLog">{log.join('\n')}</pre>
+        <div className="terminal" role="region" aria-label="IPO terminal status">
+          <div className="terminalChrome"><span /><span /><span /></div>
+          <pre>{log.join('\n')}</pre>
         </div>
       </section>
     </main>

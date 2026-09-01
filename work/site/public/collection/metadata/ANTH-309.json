@@ -1,8 +1,8 @@
 {
   "name": "IPO Floor Insider ANTH-309",
   "symbol": "IPO",
-  "description": "An anonymous IPO Floor insider at a trading desk. Metaplex Core NFT for Initial Pump Offering access, upgrades, rentals, and launchpad priority.",
-  "image": "images/ANTH-309.svg",
+  "description": "An anonymous IPO Floor insider at a trading desk. Part of a planned 333-piece Metaplex Core collection for Initial Pump Offering.",
+  "image": "images/ANTH-309.webp",
   "attributes": [
     {
       "trait_type": "Company Track",
@@ -14,51 +14,51 @@
     },
     {
       "trait_type": "Hood / Clothing",
-      "value": "trader vest"
+      "value": "black technical hoodie"
     },
     {
       "trait_type": "Face / Identity",
-      "value": "monitor reflection"
+      "value": "complete shadow"
     },
     {
       "trait_type": "Eyewear",
-      "value": "clear glasses"
-    },
-    {
-      "trait_type": "Desk",
-      "value": "glass desk"
-    },
-    {
-      "trait_type": "Monitor Configuration",
-      "value": "dual monitor"
-    },
-    {
-      "trait_type": "Room",
-      "value": "basement"
-    },
-    {
-      "trait_type": "Screen Content",
-      "value": "Pump.fun feed"
-    },
-    {
-      "trait_type": "Desk Items",
-      "value": "energy drink, hardware wallet, multiple phones, confidential folder, coffee, laptop"
-    },
-    {
-      "trait_type": "Lighting",
-      "value": "red market glow"
-    },
-    {
-      "trait_type": "Background",
-      "value": "giant terminal wall"
-    },
-    {
-      "trait_type": "Special Trait",
       "value": "none"
     },
     {
+      "trait_type": "Desk",
+      "value": "elite trading desk"
+    },
+    {
+      "trait_type": "Monitor Configuration",
+      "value": "six monitor"
+    },
+    {
+      "trait_type": "Room",
+      "value": "elite trading floor"
+    },
+    {
+      "trait_type": "Screen Content",
+      "value": "charts and order book"
+    },
+    {
+      "trait_type": "Desk Items",
+      "value": "multiple burner phones, confidential folder"
+    },
+    {
+      "trait_type": "Lighting",
+      "value": "green terminal glow"
+    },
+    {
+      "trait_type": "Background",
+      "value": "elite trading floor"
+    },
+    {
+      "trait_type": "Special Trait",
+      "value": "confidential IPO documents"
+    },
+    {
       "trait_type": "Access / Status Visual",
-      "value": "syndicate line"
+      "value": "level-driven workstation"
     },
     {
       "trait_type": "Upgrade Statuses",
@@ -73,55 +73,55 @@
     "category": "image",
     "files": [
       {
-        "uri": "images/ANTH-309.svg",
-        "type": "image/svg+xml"
+        "uri": "images/ANTH-309.webp",
+        "type": "image/webp"
       },
       {
-        "uri": "images/ANTH-309-L1.svg",
-        "type": "image/svg+xml"
+        "uri": "images/ANTH-309-L1.webp",
+        "type": "image/webp"
       },
       {
-        "uri": "images/ANTH-309-L2.svg",
-        "type": "image/svg+xml"
+        "uri": "images/ANTH-309-L2.webp",
+        "type": "image/webp"
       },
       {
-        "uri": "images/ANTH-309-L3.svg",
-        "type": "image/svg+xml"
+        "uri": "images/ANTH-309-L3.webp",
+        "type": "image/webp"
       },
       {
-        "uri": "images/ANTH-309-L4.svg",
-        "type": "image/svg+xml"
+        "uri": "images/ANTH-309-L4.webp",
+        "type": "image/webp"
       },
       {
-        "uri": "images/ANTH-309-L5.svg",
-        "type": "image/svg+xml"
+        "uri": "images/ANTH-309-L5.webp",
+        "type": "image/webp"
       }
     ],
     "upgrade_images": [
       {
         "level": 1,
         "status": "Intern",
-        "uri": "images/ANTH-309-L1.svg"
+        "uri": "images/ANTH-309-L1.webp"
       },
       {
         "level": 2,
         "status": "Analyst",
-        "uri": "images/ANTH-309-L2.svg"
+        "uri": "images/ANTH-309-L2.webp"
       },
       {
         "level": 3,
         "status": "Trader",
-        "uri": "images/ANTH-309-L3.svg"
+        "uri": "images/ANTH-309-L3.webp"
       },
       {
         "level": 4,
         "status": "Insider",
-        "uri": "images/ANTH-309-L4.svg"
+        "uri": "images/ANTH-309-L4.webp"
       },
       {
         "level": 5,
         "status": "Partner",
-        "uri": "images/ANTH-309-L5.svg"
+        "uri": "images/ANTH-309-L5.webp"
       }
     ],
     "seed": "ipo-floor-insider-309"

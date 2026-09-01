@@ -1,8 +1,8 @@
 {
   "name": "IPO Floor Insider GTA-049",
   "symbol": "IPO",
-  "description": "An anonymous IPO Floor insider at a trading desk. Metaplex Core NFT for Initial Pump Offering access, upgrades, rentals, and launchpad priority.",
-  "image": "images/GTA-049.svg",
+  "description": "An anonymous IPO Floor insider at a trading desk. Part of a planned 333-piece Metaplex Core collection for Initial Pump Offering.",
+  "image": "images/GTA-049.webp",
   "attributes": [
     {
       "trait_type": "Company Track",
@@ -14,7 +14,7 @@
     },
     {
       "trait_type": "Hood / Clothing",
-      "value": "black hoodie"
+      "value": "black technical hoodie"
     },
     {
       "trait_type": "Face / Identity",
@@ -22,35 +22,35 @@
     },
     {
       "trait_type": "Eyewear",
-      "value": "clear glasses"
+      "value": "none"
     },
     {
       "trait_type": "Desk",
-      "value": "black workstation"
+      "value": "basic black desk"
     },
     {
       "trait_type": "Monitor Configuration",
-      "value": "single monitor"
+      "value": "dual monitor"
     },
     {
       "trait_type": "Room",
-      "value": "bedroom"
+      "value": "bedroom desk"
     },
     {
       "trait_type": "Screen Content",
-      "value": "wallet tracker"
+      "value": "charts and order book"
     },
     {
       "trait_type": "Desk Items",
-      "value": "multiple phones, cash"
+      "value": "coffee"
     },
     {
       "trait_type": "Lighting",
-      "value": "blue monitor glow"
+      "value": "green terminal glow"
     },
     {
       "trait_type": "Background",
-      "value": "plain office"
+      "value": "bedroom desk"
     },
     {
       "trait_type": "Special Trait",
@@ -58,7 +58,7 @@
     },
     {
       "trait_type": "Access / Status Visual",
-      "value": "floor pass"
+      "value": "level-driven workstation"
     },
     {
       "trait_type": "Upgrade Statuses",
@@ -73,55 +73,55 @@
     "category": "image",
     "files": [
       {
-        "uri": "images/GTA-049.svg",
-        "type": "image/svg+xml"
+        "uri": "images/GTA-049.webp",
+        "type": "image/webp"
       },
       {
-        "uri": "images/GTA-049-L1.svg",
-        "type": "image/svg+xml"
+        "uri": "images/GTA-049-L1.webp",
+        "type": "image/webp"
       },
       {
-        "uri": "images/GTA-049-L2.svg",
-        "type": "image/svg+xml"
+        "uri": "images/GTA-049-L2.webp",
+        "type": "image/webp"
       },
       {
-        "uri": "images/GTA-049-L3.svg",
-        "type": "image/svg+xml"
+        "uri": "images/GTA-049-L3.webp",
+        "type": "image/webp"
       },
       {
-        "uri": "images/GTA-049-L4.svg",
-        "type": "image/svg+xml"
+        "uri": "images/GTA-049-L4.webp",
+        "type": "image/webp"
       },
       {
-        "uri": "images/GTA-049-L5.svg",
-        "type": "image/svg+xml"
+        "uri": "images/GTA-049-L5.webp",
+        "type": "image/webp"
       }
     ],
     "upgrade_images": [
       {
         "level": 1,
         "status": "Intern",
-        "uri": "images/GTA-049-L1.svg"
+        "uri": "images/GTA-049-L1.webp"
       },
       {
         "level": 2,
         "status": "Analyst",
-        "uri": "images/GTA-049-L2.svg"
+        "uri": "images/GTA-049-L2.webp"
       },
       {
         "level": 3,
         "status": "Trader",
-        "uri": "images/GTA-049-L3.svg"
+        "uri": "images/GTA-049-L3.webp"
       },
       {
         "level": 4,
         "status": "Insider",
-        "uri": "images/GTA-049-L4.svg"
+        "uri": "images/GTA-049-L4.webp"
       },
       {
         "level": 5,
         "status": "Partner",
-        "uri": "images/GTA-049-L5.svg"
+        "uri": "images/GTA-049-L5.webp"
       }
     ],
     "seed": "ipo-floor-insider-49"

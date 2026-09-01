@@ -1,5 +1,8 @@
 import { createHash } from 'node:crypto';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import sharp from 'sharp';
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 const outDir = new URL('../public/collection/', import.meta.url);
 const imageDir = new URL('./images/', outDir);
@@ -307,75 +310,109 @@ function deskSvg(t, level) {
   </g>`;
 }
 
-function svgFor(serial, level) {
+const visualStages = [
+  { slug: 'common', room: 'bedroom desk', monitors: 'dual monitor', desk: 'basic black desk', items: 'coffee' },
+  { slug: 'uncommon', room: 'private office', monitors: 'triple monitor', desk: 'professional workstation', items: 'coffee, burner phone' },
+  { slug: 'rare', room: 'institutional trading room', monitors: 'four monitor', desk: 'institutional desk', items: 'confidential folder' },
+  { slug: 'epic', room: 'elite trading floor', monitors: 'six monitor', desk: 'elite trading desk', items: 'multiple burner phones, confidential folder' },
+  { slug: 'mythic', room: 'executive command center', monitors: 'terminal wall', desk: 'executive desk', items: 'multiple burner phones, confidential IPO documents' },
+];
+
+function visualStageFor(t, level) {
+  return visualStages[Math.max(t.score, level) - 1];
+}
+
+function overlayFor(serial, level) {
   const t = makeTraits(serial);
   const c = t.company;
   const id = `${c.ticker}-${String(serial).padStart(3, '0')}`;
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1400" viewBox="0 0 1400 1400">
+  const stage = visualStageFor(t, level);
+  const chartOffset = 92 + (t.seed % 110);
+  const chartPeak = 155 + ((t.seed >>> 8) % 90);
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900">
   <defs>
-    <linearGradient id="room" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#030505"/><stop offset=".48" stop-color="#08100f"/><stop offset="1" stop-color="#151917"/></linearGradient>
-    <linearGradient id="screen" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#111b1a"/><stop offset=".52" stop-color="#07100f"/><stop offset="1" stop-color="#040606"/></linearGradient>
-    <linearGradient id="deskTop" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="${t.desk[1]}"/><stop offset=".62" stop-color="#090d0d"/><stop offset="1" stop-color="#171d1c"/></linearGradient>
-    <radialGradient id="glow" cx="50%" cy="45%" r="54%"><stop offset="0" stop-color="${t.lighting[1]}" stop-opacity=".36"/><stop offset=".42" stop-color="${c.accent2}" stop-opacity=".12"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
-    <filter id="portraitShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="22" stdDeviation="18" flood-color="#000" flood-opacity=".55"/></filter>
-    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="table" tableValues="0 .08"/></feComponentTransfer></filter>
+    <linearGradient id="marketTint" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="${c.accent}" stop-opacity=".10"/>
+      <stop offset=".55" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="${c.accent2}" stop-opacity=".08"/>
+    </linearGradient>
+    <linearGradient id="plaque" x1="0" x2="1"><stop stop-color="#070909" stop-opacity=".94"/><stop offset="1" stop-color="#111716" stop-opacity=".82"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000" flood-opacity=".75"/></filter>
   </defs>
-  <rect width="1400" height="1400" fill="#030404"/>
-  ${backgroundSvg(t, level)}
-  ${monitorsSvg(t, level)}
-  ${insiderSvg(t)}
-  ${deskSvg(t, level)}
-  <rect width="1400" height="1400" fill="#fff" filter="url(#grain)" opacity=".35"/>
-  <path d="M98 122h152M98 1270h152M1302 122h-152M1302 1270h-152" stroke="${c.accent}" stroke-width="5" stroke-linecap="round" opacity=".6"/>
-  <text x="122" y="172" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="30" font-weight="800" fill="${c.warm}" opacity=".82">$IPO</text>
-  <text x="1278" y="172" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="25" font-weight="800" fill="${c.warm}" opacity=".78">IPO #${String(serial).padStart(3, '0')}</text>
-  <desc>IPO Floor anonymous insider ${id}: ${t.clothing[0]}, ${t.identity[0]}, ${t.eyewear[0]}, ${t.room[0]}, ${t.monitor[0]}, ${t.screen}, ${t.rarityName}, ${statuses[level - 1]}</desc>
+  <rect width="900" height="900" fill="url(#marketTint)"/>
+  <path d="M64 ${chartOffset} C160 ${chartOffset - 26}, 212 ${chartPeak + 26}, 302 ${chartPeak} S462 ${chartPeak - 42}, 540 ${chartPeak - 20}" fill="none" stroke="${c.accent}" stroke-width="3" opacity=".16"/>
+  <g filter="url(#shadow)">
+    <rect x="34" y="810" width="205" height="54" rx="7" fill="url(#plaque)" stroke="${c.accent}" stroke-width="2" opacity=".95"/>
+    <text x="54" y="845" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="20" font-weight="800" fill="#f4efe4">IPO #${String(serial).padStart(3, '0')}</text>
+    <text x="850" y="845" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="800" fill="${c.accent}" opacity=".9">${c.ticker}</text>
+  </g>
+  <desc>IPO Floor anonymous insider ${id}. ${t.rarityName}. ${stage.room}. ${stage.monitors}. ${statuses[level - 1]}.</desc>
 </svg>`;
 }
 
 await mkdir(imageDir, { recursive: true });
 await mkdir(metadataDir, { recursive: true });
 
-for (let serial = 1; serial <= 333; serial += 1) {
+const stageImages = new Map();
+for (const stage of visualStages) {
+  const source = await readFile(new URL(`../public/collection/bases/${stage.slug}.png`, import.meta.url));
+  stageImages.set(stage.slug, await sharp(source).resize(900, 900, { fit: 'cover' }).toBuffer());
+}
+
+async function generateInsider(serial) {
   const t = makeTraits(serial);
   const id = `${t.company.ticker}-${String(serial).padStart(3, '0')}`;
+  const baseVisual = visualStageFor(t, 1);
+  let baseImage;
   for (let level = 1; level <= 5; level += 1) {
-    await writeFile(new URL(`${id}-L${level}.svg`, imageDir), svgFor(serial, level));
+    const stage = visualStageFor(t, level);
+    const image = await sharp(stageImages.get(stage.slug))
+      .composite([{ input: Buffer.from(overlayFor(serial, level)), blend: 'over' }])
+      .webp({ quality: 75, effort: 0 })
+      .toBuffer();
+    await writeFile(new URL(`${id}-L${level}.webp`, imageDir), image);
+    if (level === 1) baseImage = image;
   }
-  await writeFile(new URL(`${id}.svg`, imageDir), svgFor(serial, 1));
+  await writeFile(new URL(`${id}.webp`, imageDir), baseImage);
   await writeFile(new URL(`${id}.json`, metadataDir), `${JSON.stringify({
     name: `IPO Floor Insider ${id}`,
     symbol: 'IPO',
-    description: 'An anonymous IPO Floor insider at a trading desk. Metaplex Core NFT for Initial Pump Offering access, upgrades, rentals, and launchpad priority.',
-    image: `images/${id}.svg`,
+    description: 'An anonymous IPO Floor insider at a trading desk. Part of a planned 333-piece Metaplex Core collection for Initial Pump Offering.',
+    image: `images/${id}.webp`,
     attributes: [
       { trait_type: 'Company Track', value: t.company.name },
       { trait_type: 'Rarity', value: t.rarityName },
-      { trait_type: 'Hood / Clothing', value: t.clothing[0] },
-      { trait_type: 'Face / Identity', value: t.identity[0] },
-      { trait_type: 'Eyewear', value: t.eyewear[0] },
-      { trait_type: 'Desk', value: t.desk[0] },
-      { trait_type: 'Monitor Configuration', value: t.monitor[0] },
-      { trait_type: 'Room', value: t.room[0] },
-      { trait_type: 'Screen Content', value: t.screen },
-      { trait_type: 'Desk Items', value: t.items.join(', ') },
-      { trait_type: 'Lighting', value: t.lighting[0] },
-      { trait_type: 'Background', value: t.background[0] },
-      { trait_type: 'Special Trait', value: t.special[0] },
-      { trait_type: 'Access / Status Visual', value: t.access },
+      { trait_type: 'Hood / Clothing', value: 'black technical hoodie' },
+      { trait_type: 'Face / Identity', value: 'complete shadow' },
+      { trait_type: 'Eyewear', value: 'none' },
+      { trait_type: 'Desk', value: baseVisual.desk },
+      { trait_type: 'Monitor Configuration', value: baseVisual.monitors },
+      { trait_type: 'Room', value: baseVisual.room },
+      { trait_type: 'Screen Content', value: 'charts and order book' },
+      { trait_type: 'Desk Items', value: baseVisual.items },
+      { trait_type: 'Lighting', value: 'green terminal glow' },
+      { trait_type: 'Background', value: baseVisual.room },
+      { trait_type: 'Special Trait', value: t.score >= 4 ? 'confidential IPO documents' : 'none' },
+      { trait_type: 'Access / Status Visual', value: 'level-driven workstation' },
       { trait_type: 'Upgrade Statuses', value: statuses.join(', ') },
       { trait_type: 'Insider Serial', value: serial },
     ],
     properties: {
       category: 'image',
       files: [
-        { uri: `images/${id}.svg`, type: 'image/svg+xml' },
-        ...Array.from({ length: 5 }, (_, i) => ({ uri: `images/${id}-L${i + 1}.svg`, type: 'image/svg+xml' })),
+        { uri: `images/${id}.webp`, type: 'image/webp' },
+        ...Array.from({ length: 5 }, (_, i) => ({ uri: `images/${id}-L${i + 1}.webp`, type: 'image/webp' })),
       ],
-      upgrade_images: Array.from({ length: 5 }, (_, i) => ({ level: i + 1, status: statuses[i], uri: `images/${id}-L${i + 1}.svg` })),
+      upgrade_images: Array.from({ length: 5 }, (_, i) => ({ level: i + 1, status: statuses[i], uri: `images/${id}-L${i + 1}.webp` })),
       seed: `ipo-floor-insider-${serial}`,
     },
   }, null, 2)}\n`);
+}
+
+const serials = Array.from({ length: 333 }, (_, index) => index + 1);
+for (let start = 0; start < serials.length; start += 12) {
+  await Promise.all(serials.slice(start, start + 12).map(generateInsider));
 }
 
 await writeFile(new URL('manifest.json', outDir), `${JSON.stringify({

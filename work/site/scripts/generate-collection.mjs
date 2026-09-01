@@ -165,80 +165,114 @@ function line(x1, y1, x2, y2, stroke, sw = 8, opacity = 1) {
 
 function backgroundSvg(t, level) {
   const c = t.company;
-  const useTerminalWall = t.score >= 5 || (level >= 4 && t.score >= 4) || t.background[0] === 'giant terminal wall';
-  if (useTerminalWall) {
-    return `${rect(120, 205, 1160, 555, '#080c0c', '#1f2a29', 10, 10)}
-      ${Array.from({ length: 12 }, (_, i) => rect(155 + (i % 6) * 184, 245 + Math.floor(i / 6) * 245, 145, 170, '#0d1515', c.accent, 4, 8, 'opacity=".58"')).join('')}
-      ${Array.from({ length: 12 }, (_, i) => line(178 + (i % 6) * 184, 305 + Math.floor(i / 6) * 245, 278 + (i % 6) * 184, 305 + Math.floor(i / 6) * 245, t.lighting[1], 6, .55)).join('')}`;
-  }
-  if (t.background[0] === 'server racks' || t.room[0] === 'server room' || t.special[0] === 'giant server rack') {
-    return `${rect(82, 230, 175, 550, '#0b1012', '#1d2a2b', 8, 10)}${rect(1142, 230, 175, 550, '#0b1012', '#1d2a2b', 8, 10)}
-      ${Array.from({ length: 7 }, (_, i) => `${line(112, 304 + i * 62, 226, 304 + i * 62, i % 2 ? c.accent : c.accent2, 8, .38)}${line(1172, 304 + i * 62, 1286, 304 + i * 62, i % 2 ? c.accent2 : c.accent, 8, .38)}`).join('')}`;
-  }
-  if (t.background[0] === 'charts wall' || t.background[0] === 'trading floor') {
-    return `${rect(150, 240, 1100, 455, '#080c0c', '#1f2a29', 8, 8)}
-      ${Array.from({ length: 8 }, (_, i) => line(210 + i * 120, 635, 255 + i * 120, 410 - ((t.seed >> i) % 110), c.accent, 8, .52)).join('')}`;
-  }
-  return `<path d="M65 725V330h92v395M182 725V238h76v487M290 725V380h115v345M1060 725V282h98v443M1188 725V362h100v363" fill="#0c1111" stroke="#1c2726" stroke-width="8" opacity=".7"/>
-    <path d="M88 390h48M88 468h48M202 306h34M202 382h34M1088 352h44M1088 434h44M1212 430h48" stroke="${c.accent}" stroke-width="7" opacity=".35"/>`;
+  const premium = t.score >= 4 || level >= 4;
+  const server = t.room[0].includes('server') || t.background[0] === 'server racks' || t.special[0] === 'giant server rack';
+  const skyline = t.room[0] === 'penthouse' || t.background[0].includes('skyline') || t.special[0] === 'penthouse view';
+  const wall = t.score >= 5 || t.background[0] === 'giant terminal wall' || level >= 5;
+  const sidePanels = Array.from({ length: premium ? 6 : 3 }, (_, i) => {
+    const left = 92 + i * 74;
+    const right = 1308 - i * 74;
+    const h = 260 + ((t.seed >> i) % 120);
+    return `${rect(left, 302 + i * 18, 42, h, '#0b1111', '#20302e', 3, 5, 'opacity=".58"')}
+      ${rect(right - 42, 302 + i * 18, 42, h, '#0b1111', '#20302e', 3, 5, 'opacity=".58"')}`;
+  }).join('');
+  const skylineView = skyline
+    ? `<rect x="150" y="168" width="1100" height="420" rx="22" fill="#070b10" stroke="#22302e" stroke-width="5" opacity=".86"/>
+      <path d="M190 548V420h54v128M270 548V342h78v206M382 548V392h62v156M948 548V370h86v178M1062 548V314h72v234M1166 548V430h44v118" fill="#121a1d" opacity=".92"/>
+      <path d="M178 284c170 72 310 72 478 8s344-78 566 6" stroke="${c.accent}" stroke-width="5" opacity=".24" fill="none"/>`
+    : '';
+  const rackView = server
+    ? `${rect(116, 250, 136, 430, '#080d0e', '#1c2a29', 5, 8, 'opacity=".78"')}
+      ${rect(1148, 250, 136, 430, '#080d0e', '#1c2a29', 5, 8, 'opacity=".78"')}
+      ${Array.from({ length: 6 }, (_, i) => `${line(142, 310 + i * 54, 226, 310 + i * 54, i % 2 ? c.accent2 : c.accent, 4, .42)}${line(1174, 310 + i * 54, 1258, 310 + i * 54, i % 2 ? c.accent : c.accent2, 4, .42)}`).join('')}`
+    : '';
+  const terminalWall = wall
+    ? `${rect(202, 190, 996, 390, '#070b0b', '#20302e', 5, 18, 'opacity=".62"')}
+      ${Array.from({ length: 10 }, (_, i) => {
+        const x = 238 + (i % 5) * 184;
+        const y = 224 + Math.floor(i / 5) * 162;
+        return `${rect(x, y, 136, 104, '#0c1515', '#243331', 2, 8, 'opacity=".76"')}${line(x + 18, y + 34, x + 94, y + 34, i % 2 ? c.accent2 : c.accent, 4, .52)}`;
+      }).join('')}`
+    : '';
+  return `<rect x="72" y="72" width="1256" height="1256" rx="38" fill="#070909" stroke="#1d2624" stroke-width="8"/>
+    <rect x="104" y="104" width="1192" height="1192" rx="28" fill="url(#room)" stroke="${c.accent}" stroke-width="2" opacity=".84"/>
+    ${sidePanels}${skylineView}${rackView}${terminalWall}
+    <ellipse cx="700" cy="618" rx="${410 + t.score * 34}" ry="${250 + level * 20}" fill="url(#glow)" opacity=".9"/>
+    <path d="M116 724h1168" stroke="${c.accent}" stroke-width="2" opacity=".18"/>
+    <path d="M210 1190h980" stroke="#26312f" stroke-width="3" opacity=".55"/>`;
 }
 
-function monitorSvg(x, y, w, h, t, label) {
-  return `${rect(x, y, w, h, '#060909', '#111515', 10, 16)}
-    ${rect(x + 18, y + 18, w - 36, h - 48, '#101819', t.company.accent, 4, 8, 'opacity=".88"')}
-    ${line(x + 44, y + 62, x + w * .48, y + 62, t.lighting[1], 8, .85)}
-    ${line(x + 44, y + 102, x + w * .67, y + 102, t.company.warm, 6, .55)}
-    <path d="M${x + w * .5} ${y + h - 84}l36-46 52 36 70-78 70 86" stroke="${t.company.accent}" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".85"/>
-    <text x="${x + w / 2}" y="${y + h - 18}" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="${Math.max(14, Math.min(22, w / 12))}" fill="${t.company.warm}" opacity=".72">${label.toUpperCase()}</text>`;
+function monitorSvg(x, y, w, h, t, label, tilt = 0) {
+  const screen = `<g transform="rotate(${tilt} ${x + w / 2} ${y + h / 2})">
+    <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="18" fill="#050707" stroke="#1a2423" stroke-width="8"/>
+    <rect x="${x + 18}" y="${y + 18}" width="${w - 36}" height="${h - 44}" rx="10" fill="url(#screen)" stroke="${t.company.accent}" stroke-width="3" opacity=".93"/>
+    <path d="M${x + 44} ${y + 62}h${w * .32}M${x + 44} ${y + 104}h${w * .52}M${x + 44} ${y + 146}h${w * .24}" stroke="${t.lighting[1]}" stroke-width="7" stroke-linecap="round" opacity=".7"/>
+    <path d="M${x + w * .42} ${y + h - 76}l34-42 50 32 58-66 70 78" stroke="${t.company.accent}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".82"/>
+    <text x="${x + w / 2}" y="${y + h - 16}" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="${Math.max(12, Math.min(18, w / 14))}" fill="${t.company.warm}" opacity=".58">${label.toUpperCase()}</text>
+  </g>`;
+  return screen;
 }
 
 function monitorsSvg(t, level) {
-  const count = Math.min(10, t.monitor[1] + level - 1);
-  const rows = count > 5 ? 2 : 1;
-  const topCount = rows === 2 ? Math.ceil(count / 2) : count;
-  const bottomCount = rows === 2 ? count - topCount : 0;
-  const topW = count <= 3 ? 330 : Math.max(150, Math.floor(900 / topCount) - 18);
-  const topStart = 700 - (topCount * topW + (topCount - 1) * 18) / 2;
-  const top = Array.from({ length: topCount }, (_, i) => monitorSvg(topStart + i * (topW + 18), rows === 2 ? 230 : 280, topW, rows === 2 ? 185 : 255, t, pick(traitPools.screen, t.seed, i + level))).join('');
-  const bottomW = bottomCount ? Math.max(150, Math.floor(780 / bottomCount) - 18) : 0;
-  const bottomStart = 700 - (bottomCount * bottomW + (bottomCount - 1) * 18) / 2;
-  const bottom = Array.from({ length: bottomCount }, (_, i) => monitorSvg(bottomStart + i * (bottomW + 18), 455, bottomW, 178, t, pick(traitPools.screen, t.seed, i + 11))).join('');
+  const count = Math.min(9, t.monitor[1] + level - 1);
+  if (count <= 2) {
+    return `${monitorSvg(218, 310, 320, 240, t, t.screen, -3)}
+      ${monitorSvg(862, 310, 320, 240, t, pick(traitPools.screen, t.seed, 41), 3)}`;
+  }
+  if (count <= 4) {
+    return `${monitorSvg(144, 292, 280, 212, t, pick(traitPools.screen, t.seed, 31), -4)}
+      ${monitorSvg(430, 252, 250, 194, t, t.screen, -1)}
+      ${monitorSvg(720, 252, 250, 194, t, pick(traitPools.screen, t.seed, 33), 1)}
+      ${monitorSvg(976, 292, 280, 212, t, pick(traitPools.screen, t.seed, 34), 4)}`;
+  }
+  const top = Array.from({ length: Math.min(count, 5) }, (_, i) => monitorSvg(132 + i * 232, 220 + (i % 2) * 24, 200, 156, t, pick(traitPools.screen, t.seed, 50 + i), i - 2)).join('');
+  const bottom = Array.from({ length: Math.min(count - 5, 4) }, (_, i) => monitorSvg(246 + i * 234, 410, 202, 152, t, pick(traitPools.screen, t.seed, 60 + i), i % 2 ? 2 : -2)).join('');
   return `${top}${bottom}`;
 }
 
 function insiderSvg(t) {
   const cx = 700;
-  const bodyY = 672;
   const hoodFill = t.clothing[1];
-  const shadow = '#020303';
-  const headY = 542;
-  const trim = t.company.accent;
+  const accent = t.company.accent;
   const suitMode = ['dark suit', 'luxury coat', 'trader vest', 'bomber jacket'].includes(t.clothing[0]);
-  const clothHighlight = suitMode ? '#111817' : '#183118';
-  const innerFace = p(`M${cx - 86} ${headY - 78}c42-38 130-38 172 0c28 46 22 120-10 168c-46 28-116 28-162 0c-32-48-38-122 0-168z`, '#030505', shadow, 10);
-  const face = t.identity[0] === 'pixelated face'
-    ? `${rect(cx - 66, headY - 30, 36, 30, '#101414', shadow, 3)}${rect(cx - 18, headY - 22, 40, 28, t.company.accent, shadow, 3, 0, 'opacity=".34"')}${rect(cx + 28, headY + 4, 34, 26, '#172120', shadow, 3)}`
+  const torsoFill = suitMode ? '#101415' : hoodFill;
+  const torsoShade = suitMode ? '#070a0a' : '#0e2113';
+  const inner = '#040606';
+  const faceCore = t.identity[0] === 'pixelated face'
+    ? `<rect x="646" y="544" width="44" height="34" fill="#101716" opacity=".95"/><rect x="696" y="534" width="52" height="38" fill="${accent}" opacity=".26"/><rect x="668" y="594" width="76" height="20" fill="#0e1514" opacity=".9"/>`
     : t.identity[0] === 'bandana mask'
-      ? p(`M${cx - 74} ${headY + 26}h148l-32 58h-84z`, '#151010', t.company.accent2, 5, 'opacity=".74"')
+      ? `<path d="M620 586h160l-34 70H654z" fill="#171010" stroke="${t.company.accent2}" stroke-width="4" opacity=".86"/>`
       : t.identity[0].includes('reflection')
-        ? `${p(`M${cx - 76} ${headY - 18}h60l18 30h-76z`, '#081514', t.company.accent, 5, 'opacity=".72"')}${p(`M${cx + 16} ${headY - 18}h60l0 30h-76z`, '#081514', t.company.accent, 5, 'opacity=".72"')}`
-        : `${line(cx - 52, headY - 12, cx + 52, headY - 12, t.company.accent, 6, .34)}${line(cx - 28, headY + 34, cx + 28, headY + 34, '#111818', 6, .44)}`;
-  const glasses = t.eyewear[0] === 'none' ? '' : `${rect(cx - 86, headY - 30, 64, 34, '#061010', t.company.accent, 5, 6, 'opacity=".76"')}${rect(cx + 22, headY - 30, 64, 34, '#061010', t.company.accent, 5, 6, 'opacity=".76"')}${line(cx - 22, headY - 12, cx + 22, headY - 12, t.company.accent, 5, .64)}`;
-  const lapels = suitMode
-    ? `${p(`M${cx - 178} ${bodyY + 88}l108 324h-124l-74-270z`, '#070a0a', shadow, 8, 'opacity=".55"')}${p(`M${cx + 178} ${bodyY + 88}l-108 324h124l74-270z`, '#070a0a', shadow, 8, 'opacity=".55"')}${line(cx - 82, bodyY + 128, cx - 20, bodyY + 372, t.company.warm, 4, .28)}${line(cx + 82, bodyY + 128, cx + 20, bodyY + 372, t.company.warm, 4, .28)}`
-    : `${line(cx - 94, bodyY + 108, cx - 124, bodyY + 314, t.company.accent, 5, .24)}${line(cx + 94, bodyY + 108, cx + 124, bodyY + 314, t.company.accent, 5, .24)}${line(cx - 36, bodyY + 54, cx - 60, bodyY + 186, t.company.warm, 4, .26)}${line(cx + 36, bodyY + 54, cx + 60, bodyY + 186, t.company.warm, 4, .26)}`;
-  return `<ellipse cx="${cx}" cy="${bodyY + 276}" rx="332" ry="74" fill="${shadow}" opacity=".52"/>
-    ${p(`M${cx - 292} ${bodyY + 424}c22-164 92-292 196-360c58-38 134-58 196-58s138 20 196 58c104 68 174 196 196 360H${cx - 292}z`, hoodFill, shadow, 15)}
-    <path d="M${cx - 172} ${bodyY + 156}c46-44 104-66 172-66s126 22 172 66l48 250H${cx - 220}z" fill="#050808" opacity=".34"/>
-    ${p(`M${cx - 150} ${headY + 34}c0-144 62-262 150-272c88 10 150 128 150 272c-50-42-100-64-150-64s-100 22-150 64z`, hoodFill, shadow, 14)}
-    ${p(`M${cx - 112} ${headY - 28}c18-90 62-146 112-146s94 56 112 146c-58-30-166-30-224 0z`, '#0a0e0e', shadow, 8, 'opacity=".92"')}
-    ${innerFace}
-    <path d="M${cx - 74} ${headY - 92}c42-24 106-24 148 0" stroke="${trim}" stroke-width="5" stroke-linecap="round" opacity=".2" fill="none"/>
-    ${face}${glasses}
-    <path d="M${cx - 154} ${bodyY + 102}c36-26 86-42 154-42s118 16 154 42" stroke="${clothHighlight}" stroke-width="12" stroke-linecap="round" opacity=".42" fill="none"/>
-    ${lapels}
-    ${p(`M${cx - 242} ${bodyY + 300}c-96 32-166 86-218 162h190c32-42 82-72 150-90z`, hoodFill, shadow, 14)}
-    ${p(`M${cx + 242} ${bodyY + 300}c96 32 166 86 218 162H${cx + 270}c-32-42-82-72-150-90z`, hoodFill, shadow, 14)}`;
+        ? `<path d="M622 548h64l26 34h-88zM714 548h64l-2 34h-88z" fill="#0b1a19" stroke="${accent}" stroke-width="4" opacity=".76"/>`
+        : `<path d="M632 568h136" stroke="${accent}" stroke-width="6" stroke-linecap="round" opacity=".32"/><path d="M666 626h68" stroke="#17201e" stroke-width="6" stroke-linecap="round" opacity=".9"/>`;
+  const eyewear = t.eyewear[0] === 'none' ? '' : `<g opacity=".88">
+    <rect x="608" y="538" width="78" height="38" rx="9" fill="#071010" stroke="${accent}" stroke-width="4"/>
+    <rect x="714" y="538" width="78" height="38" rx="9" fill="#071010" stroke="${accent}" stroke-width="4"/>
+    <path d="M686 558h28" stroke="${accent}" stroke-width="4"/>
+  </g>`;
+  const jacketLines = suitMode
+    ? `<path d="M566 748l86 300h-146l-88-250zM834 748l-86 300h146l88-250z" fill="#070909" opacity=".62"/>
+      <path d="M630 746l54 252M770 746l-54 252" stroke="${t.company.warm}" stroke-width="4" opacity=".24"/>`
+    : `<path d="M612 760c28 34 56 52 88 52s60-18 88-52" stroke="${accent}" stroke-width="5" opacity=".2" fill="none"/>
+      <path d="M584 824l-28 214M816 824l28 214" stroke="${t.company.warm}" stroke-width="4" opacity=".18"/>`;
+  return `<g filter="url(#portraitShadow)">
+    <ellipse cx="700" cy="1062" rx="372" ry="86" fill="#000" opacity=".48"/>
+    <path d="M400 1092c20-132 84-244 188-318 34-24 72-42 112-52 40 10 78 28 112 52 104 74 168 186 188 318z" fill="${torsoFill}" stroke="#050606" stroke-width="9"/>
+    <path d="M500 1092c8-118 52-214 132-288 24-22 46-38 68-48 22 10 44 26 68 48 80 74 124 170 132 288z" fill="${torsoShade}" opacity=".5"/>
+    <path d="M536 650c8-138 74-244 164-268 90 24 156 130 164 268-34-40-88-66-164-66s-130 26-164 66z" fill="${hoodFill}" stroke="#050606" stroke-width="10"/>
+    <path d="M584 650c14-112 58-184 116-198 58 14 102 86 116 198-34-22-72-34-116-34s-82 12-116 34z" fill="#09100f" stroke="#050606" stroke-width="6" opacity=".96"/>
+    <path d="M600 596c30-42 64-62 100-62s70 20 100 62c2 82-32 136-100 160-68-24-102-78-100-160z" fill="${inner}" stroke="#050606" stroke-width="5"/>
+    <ellipse cx="700" cy="596" rx="96" ry="64" fill="${accent}" opacity=".08"/>
+    <path d="M616 522c48-48 120-48 168 0" stroke="${accent}" stroke-width="4" stroke-linecap="round" opacity=".18" fill="none"/>
+    ${faceCore}${eyewear}
+    <path d="M560 734c40-36 86-54 140-54s100 18 140 54" stroke="${accent}" stroke-width="6" stroke-linecap="round" opacity=".24" fill="none"/>
+    ${jacketLines}
+    <path d="M606 790c26 44 58 66 94 66s68-22 94-66" stroke="${accent}" stroke-width="5" opacity=".18" fill="none"/>
+    <path d="M674 806v260M726 806v260" stroke="${t.company.warm}" stroke-width="4" opacity=".2"/>
+    <path d="M438 968c-84 22-150 66-198 132h228c44-42 92-70 144-84z" fill="${torsoFill}" stroke="#050606" stroke-width="8"/>
+    <path d="M962 968c84 22 150 66 198 132H932c-44-42-92-70-144-84z" fill="${torsoFill}" stroke="#050606" stroke-width="8"/>
+    <path d="M250 1098h900" stroke="${accent}" stroke-width="5" stroke-linecap="round" opacity=".16"/>
+  </g>`;
 }
 
 function itemSvg(kind, x, y, t) {
@@ -254,21 +288,23 @@ function itemSvg(kind, x, y, t) {
 }
 
 function deskSvg(t, level) {
-  const y = 960 - level * 18;
-  const items = t.items.slice(0, Math.min(t.items.length, 3 + level)).map((kind, i) => itemSvg(kind, 165 + i * 145 + ((t.seed >> i) % 26), 1045 + (i % 2) * 58, t)).join('');
-  const special = t.special[0] === 'none' ? '' : itemSvg(t.special[0].includes('phone') ? 'multiple phones' : t.special[0].includes('document') ? 'confidential folder' : 'laptop', 1040, 1020, t);
-  const sleeve = t.clothing[1];
-  return `${p(`M130 ${y}h1140l96 330H34z`, t.desk[1], '#050606', 20)}
-    <path d="M165 ${y + 28}h1070l58 210H108z" fill="#0d1111" opacity=".36"/>
-    ${line(240, y + 64, 1160, y + 64, t.company.accent, 12, .48)}
-    ${p(`M520 ${y + 56}c-70 38-128 82-178 134l90 42c48-52 94-86 142-104z`, sleeve, '#050606', 10)}
-    ${p(`M880 ${y + 56}c70 38 128 82 178 134l-90 42c-48-52-94-86-142-104z`, sleeve, '#050606', 10)}
-    ${rect(416, y + 206, 76, 42, '#e8e2d6', '#050606', 7, 16)}
-    ${rect(908, y + 206, 76, 42, '#e8e2d6', '#050606', 7, 16)}
-    ${rect(500, y + 95, 400, 118, '#070a0a', '#050606', 12, 18)}
-    ${line(545, y + 140, 855, y + 140, t.company.accent, 13, .7)}${line(570, y + 184, 830, y + 184, t.company.warm, 10, .55)}
-    ${rect(575, y + 245, 250, 54, '#080c0c', '#050606', 9, 14)}${line(608, y + 272, 792, y + 272, t.company.warm, 7, .58)}
-    ${items}${special}`;
+  const y = 962 - level * 14;
+  const items = t.items.slice(0, Math.min(t.items.length, 2 + level)).map((kind, i) => itemSvg(kind, 172 + i * 142 + ((t.seed >> i) % 22), 1084 + (i % 2) * 48, t)).join('');
+  const special = t.special[0] === 'none' ? '' : itemSvg(t.special[0].includes('phone') ? 'multiple phones' : t.special[0].includes('document') ? 'confidential folder' : 'laptop', 1052, 1052, t);
+  return `<g>
+    <path d="M142 ${y}h1116l104 304H38z" fill="url(#deskTop)" stroke="#050606" stroke-width="10" stroke-linejoin="round"/>
+    <path d="M184 ${y + 28}h1032l58 176H126z" fill="#0f1514" opacity=".46"/>
+    <path d="M258 ${y + 52}h884" stroke="${t.company.accent}" stroke-width="7" stroke-linecap="round" opacity=".54"/>
+    <path d="M514 ${y + 36}c-58 30-108 72-148 126l92 40c38-42 82-70 132-88z" fill="${t.clothing[1]}" stroke="#050606" stroke-width="7"/>
+    <path d="M886 ${y + 36}c58 30 108 72 148 126l-92 40c-38-42-82-70-132-88z" fill="${t.clothing[1]}" stroke="#050606" stroke-width="7"/>
+    <rect x="416" y="${y + 190}" width="82" height="42" rx="18" fill="#d9d3c8" stroke="#050606" stroke-width="5"/>
+    <rect x="902" y="${y + 190}" width="82" height="42" rx="18" fill="#d9d3c8" stroke="#050606" stroke-width="5"/>
+    <rect x="492" y="${y + 90}" width="416" height="116" rx="18" fill="#070a0a" stroke="#050606" stroke-width="8"/>
+    <path d="M540 ${y + 130}h320M572 ${y + 170}h256" stroke="${t.company.accent}" stroke-width="9" stroke-linecap="round" opacity=".62"/>
+    <rect x="574" y="${y + 238}" width="252" height="52" rx="13" fill="#080c0c" stroke="#050606" stroke-width="6"/>
+    <path d="M610 ${y + 265}h180" stroke="${t.company.warm}" stroke-width="5" stroke-linecap="round" opacity=".48"/>
+    ${items}${special}
+  </g>`;
 }
 
 function svgFor(serial, level) {
@@ -277,22 +313,22 @@ function svgFor(serial, level) {
   const id = `${c.ticker}-${String(serial).padStart(3, '0')}`;
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1400" viewBox="0 0 1400 1400">
   <defs>
-    <linearGradient id="room" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#040505"/><stop offset=".58" stop-color="#0b0f0e"/><stop offset="1" stop-color="#171b1a"/></linearGradient>
-    <radialGradient id="glow" cx="50%" cy="47%" r="58%"><stop offset="0" stop-color="${t.lighting[1]}" stop-opacity=".62"/><stop offset=".45" stop-color="${c.accent2}" stop-opacity=".17"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
-    <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter>
+    <linearGradient id="room" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#030505"/><stop offset=".48" stop-color="#08100f"/><stop offset="1" stop-color="#151917"/></linearGradient>
+    <linearGradient id="screen" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#111b1a"/><stop offset=".52" stop-color="#07100f"/><stop offset="1" stop-color="#040606"/></linearGradient>
+    <linearGradient id="deskTop" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="${t.desk[1]}"/><stop offset=".62" stop-color="#090d0d"/><stop offset="1" stop-color="#171d1c"/></linearGradient>
+    <radialGradient id="glow" cx="50%" cy="45%" r="54%"><stop offset="0" stop-color="${t.lighting[1]}" stop-opacity=".36"/><stop offset=".42" stop-color="${c.accent2}" stop-opacity=".12"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+    <filter id="portraitShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="22" stdDeviation="18" flood-color="#000" flood-opacity=".55"/></filter>
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="table" tableValues="0 .08"/></feComponentTransfer></filter>
   </defs>
-  <rect width="1400" height="1400" fill="url(#room)"/>
-  <rect x="54" y="54" width="1292" height="1292" rx="46" fill="none" stroke="#27302f" stroke-width="16"/>
-  <rect x="88" y="88" width="1224" height="1224" rx="26" fill="none" stroke="${c.accent}" stroke-width="4" opacity=".38"/>
-  <circle cx="700" cy="620" r="${390 + t.score * 42 + level * 22}" fill="url(#glow)" filter="url(#soft)"/>
+  <rect width="1400" height="1400" fill="#030404"/>
   ${backgroundSvg(t, level)}
   ${monitorsSvg(t, level)}
   ${insiderSvg(t)}
   ${deskSvg(t, level)}
-  <rect x="114" y="112" width="220" height="58" rx="14" fill="#0a0d0d" stroke="${c.accent}" stroke-width="5"/>
-  <text x="224" y="151" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800" fill="${c.warm}">$IPO</text>
-  <rect x="1058" y="112" width="228" height="58" rx="14" fill="#0a0d0d" stroke="#27302f" stroke-width="5"/>
-  <text x="1172" y="151" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800" fill="${c.warm}">IPO #${String(serial).padStart(3, '0')}</text>
+  <rect width="1400" height="1400" fill="#fff" filter="url(#grain)" opacity=".35"/>
+  <path d="M98 122h152M98 1270h152M1302 122h-152M1302 1270h-152" stroke="${c.accent}" stroke-width="5" stroke-linecap="round" opacity=".6"/>
+  <text x="122" y="172" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="30" font-weight="800" fill="${c.warm}" opacity=".82">$IPO</text>
+  <text x="1278" y="172" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="25" font-weight="800" fill="${c.warm}" opacity=".78">IPO #${String(serial).padStart(3, '0')}</text>
   <desc>IPO Floor anonymous insider ${id}: ${t.clothing[0]}, ${t.identity[0]}, ${t.eyewear[0]}, ${t.room[0]}, ${t.monitor[0]}, ${t.screen}, ${t.rarityName}, ${statuses[level - 1]}</desc>
 </svg>`;
 }

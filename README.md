@@ -45,6 +45,24 @@ cd work/site
 npm run build
 ```
 
+## Vercel
+
+This repo is configured for Vercel from the repository root.
+
+```bash
+npm ci
+npm run build:vercel
+```
+
+For a manual Vercel import, use:
+
+```text
+Framework Preset: Next.js
+Install Command: npm ci
+Build Command: npm run build:vercel
+Output Directory: work/site/.next
+```
+
 ## Collection
 
 The generator is deterministic:

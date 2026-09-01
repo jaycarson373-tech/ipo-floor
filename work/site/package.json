@@ -8,7 +8,10 @@
   "scripts": {
     "dev": "vinext dev",
     "build": "vinext build",
+    "build:vercel": "next build",
+    "dev:vercel": "next dev",
     "start": "vinext start",
+    "start:vercel": "next start",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "generate:collection": "node scripts/generate-collection.mjs",
     "mint:core": "node scripts/mint-core-assets.mjs"

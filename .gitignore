@@ -10,3 +10,4 @@ work/keys/
 outputs/*
 !outputs/launch-addresses.txt
 !outputs/ipo-insider-preview-30.svg.png
+.vercel

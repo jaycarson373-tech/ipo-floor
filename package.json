@@ -13,7 +13,10 @@
   "scripts": {
     "dev": "npm --workspace sites-project run dev --",
     "build": "npm --workspace sites-project run build",
+    "build:vercel": "npm --workspace sites-project run build:vercel",
+    "dev:vercel": "npm --workspace sites-project run dev:vercel --",
     "start": "npm --workspace sites-project run start --",
+    "start:vercel": "npm --workspace sites-project run start:vercel --",
     "lint": "npm --workspace sites-project run lint",
     "generate:collection": "npm --workspace sites-project run generate:collection",
     "mint:core": "npm --workspace sites-project run mint:core",

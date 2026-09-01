@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "soft violet, soft points"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "volume map"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "center zip"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "balanced screen glow"
+    },
+    {
       "trait_type": "Desk",
       "value": "basic black desk"
     },
@@ -124,6 +140,7 @@
         "uri": "images/NLNK-149-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-149"
+    "seed": "ipo-floor-insider-149",
+    "visual_signature": "A261768E"
   }
 }

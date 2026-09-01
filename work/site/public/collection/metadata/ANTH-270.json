@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "ice white, narrow slits"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "signal grid"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "reflective piping"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "right monitor wash"
+    },
+    {
       "trait_type": "Desk",
       "value": "institutional desk"
     },
@@ -124,6 +140,7 @@
         "uri": "images/ANTH-270-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-270"
+    "seed": "ipo-floor-insider-270",
+    "visual_signature": "12A28185"
   }
 }

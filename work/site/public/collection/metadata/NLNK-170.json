@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "terminal green, narrow slits"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "signal grid"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "chest stitch"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "low desk bounce"
+    },
+    {
       "trait_type": "Desk",
       "value": "basic black desk"
     },
@@ -124,6 +140,7 @@
         "uri": "images/NLNK-170-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-170"
+    "seed": "ipo-floor-insider-170",
+    "visual_signature": "92532AB5"
   }
 }

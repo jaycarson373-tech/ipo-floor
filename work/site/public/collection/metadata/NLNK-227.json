@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "market red, asymmetric signal"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "launch scanner"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "technical seam"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "balanced screen glow"
+    },
+    {
       "trait_type": "Desk",
       "value": "professional workstation"
     },
@@ -124,6 +140,7 @@
         "uri": "images/NLNK-227-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-227"
+    "seed": "ipo-floor-insider-227",
+    "visual_signature": "FCD6F220"
   }
 }

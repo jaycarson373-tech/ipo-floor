@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "ice white, low visor"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "split tape"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "reflective piping"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "low desk bounce"
+    },
+    {
       "trait_type": "Desk",
       "value": "elite trading desk"
     },
@@ -124,6 +140,7 @@
         "uri": "images/NLNK-323-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-323"
+    "seed": "ipo-floor-insider-323",
+    "visual_signature": "4AA53BF7"
   }
 }

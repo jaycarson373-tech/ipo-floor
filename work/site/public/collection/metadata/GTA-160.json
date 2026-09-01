@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "ice white, angled reflection"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "market depth"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "shoulder panels"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "overhead spill"
+    },
+    {
       "trait_type": "Desk",
       "value": "basic black desk"
     },
@@ -124,6 +140,7 @@
         "uri": "images/GTA-160-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-160"
+    "seed": "ipo-floor-insider-160",
+    "visual_signature": "E1C7283C"
   }
 }

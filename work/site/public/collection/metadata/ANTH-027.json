@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "mint teal, asymmetric signal"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "market depth"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "shoulder panels"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "balanced screen glow"
+    },
+    {
       "trait_type": "Desk",
       "value": "basic black desk"
     },
@@ -124,6 +140,7 @@
         "uri": "images/ANTH-027-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-27"
+    "seed": "ipo-floor-insider-27",
+    "visual_signature": "21C6AC34"
   }
 }

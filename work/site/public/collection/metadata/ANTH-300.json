@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "terminal green, soft points"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "market depth"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "shoulder panels"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "balanced screen glow"
+    },
+    {
       "trait_type": "Desk",
       "value": "institutional desk"
     },
@@ -124,6 +140,7 @@
         "uri": "images/ANTH-300-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-300"
+    "seed": "ipo-floor-insider-300",
+    "visual_signature": "D60DB6D4"
   }
 }

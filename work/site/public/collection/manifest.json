@@ -8,6 +8,10 @@
     "Hood / Clothing",
     "Face / Identity",
     "Eyewear",
+    "Eye Glow",
+    "Terminal Layout",
+    "Hood Detail",
+    "Ambient Signature",
     "Desk",
     "Monitor Configuration",
     "Room",
@@ -70,5 +74,5 @@
       "max": 333
     }
   ],
-  "generatedAt": "2026-09-01T17:00:13.341Z"
+  "generatedAt": "2026-09-01T17:39:53.157Z"
 }

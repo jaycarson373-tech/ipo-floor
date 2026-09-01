@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "mint teal, soft points"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "market depth"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "shoulder panels"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "overhead spill"
+    },
+    {
       "trait_type": "Desk",
       "value": "basic black desk"
     },
@@ -124,6 +140,7 @@
         "uri": "images/NLNK-167-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-167"
+    "seed": "ipo-floor-insider-167",
+    "visual_signature": "A44718BC"
   }
 }

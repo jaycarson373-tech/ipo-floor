@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "ice white, soft points"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "market depth"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "technical seam"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "left monitor wash"
+    },
+    {
       "trait_type": "Desk",
       "value": "professional workstation"
     },
@@ -124,6 +140,7 @@
         "uri": "images/NLNK-209-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-209"
+    "seed": "ipo-floor-insider-209",
+    "visual_signature": "AE24D644"
   }
 }

@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "mint teal, soft points"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "volume map"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "shoulder panels"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "left monitor wash"
+    },
+    {
       "trait_type": "Desk",
       "value": "basic black desk"
     },
@@ -124,6 +140,7 @@
         "uri": "images/ANTH-021-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-21"
+    "seed": "ipo-floor-insider-21",
+    "visual_signature": "F3DC15A6"
   }
 }

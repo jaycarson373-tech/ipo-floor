@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "ice white, segmented pixels"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "split tape"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "reflective piping"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "right monitor wash"
+    },
+    {
       "trait_type": "Desk",
       "value": "professional workstation"
     },
@@ -124,6 +140,7 @@
         "uri": "images/ANTH-249-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-249"
+    "seed": "ipo-floor-insider-249",
+    "visual_signature": "CCB9EC47"
   }
 }

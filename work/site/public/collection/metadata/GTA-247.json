@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "market red, narrow slits"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "split tape"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "reflective piping"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "low desk bounce"
+    },
+    {
       "trait_type": "Desk",
       "value": "professional workstation"
     },
@@ -124,6 +140,7 @@
         "uri": "images/GTA-247-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-247"
+    "seed": "ipo-floor-insider-247",
+    "visual_signature": "5C6EAB47"
   }
 }

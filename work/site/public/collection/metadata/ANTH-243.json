@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "cold cyan, angled reflection"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "launch scanner"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "center zip"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "left monitor wash"
+    },
+    {
       "trait_type": "Desk",
       "value": "professional workstation"
     },
@@ -124,6 +140,7 @@
         "uri": "images/ANTH-243-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-243"
+    "seed": "ipo-floor-insider-243",
+    "visual_signature": "89C05BD8"
   }
 }

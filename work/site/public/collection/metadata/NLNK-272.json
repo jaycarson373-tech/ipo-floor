@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "market red, asymmetric signal"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "volume map"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "center zip"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "balanced screen glow"
+    },
+    {
       "trait_type": "Desk",
       "value": "institutional desk"
     },
@@ -124,6 +140,7 @@
         "uri": "images/NLNK-272-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-272"
+    "seed": "ipo-floor-insider-272",
+    "visual_signature": "D88F8D2E"
   }
 }

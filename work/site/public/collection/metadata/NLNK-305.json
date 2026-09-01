@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "cold cyan, angled reflection"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "volume map"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "shoulder panels"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "balanced screen glow"
+    },
+    {
       "trait_type": "Desk",
       "value": "institutional desk"
     },
@@ -124,6 +140,7 @@
         "uri": "images/NLNK-305-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-305"
+    "seed": "ipo-floor-insider-305",
+    "visual_signature": "8A6A6136"
   }
 }

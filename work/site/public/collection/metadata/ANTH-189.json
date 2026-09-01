@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "terminal green, narrow slits"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "wallet trace"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "reflective piping"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "blackout contrast"
+    },
+    {
       "trait_type": "Desk",
       "value": "professional workstation"
     },
@@ -124,6 +140,7 @@
         "uri": "images/ANTH-189-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-189"
+    "seed": "ipo-floor-insider-189",
+    "visual_signature": "7506A629"
   }
 }

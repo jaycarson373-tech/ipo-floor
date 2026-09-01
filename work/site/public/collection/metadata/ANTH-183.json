@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "mint teal, asymmetric signal"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "market depth"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "technical seam"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "left monitor wash"
+    },
+    {
       "trait_type": "Desk",
       "value": "professional workstation"
     },
@@ -124,6 +140,7 @@
         "uri": "images/ANTH-183-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-183"
+    "seed": "ipo-floor-insider-183",
+    "visual_signature": "70E10DDC"
   }
 }

@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "market red, soft points"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "launch scanner"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "shoulder panels"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "left monitor wash"
+    },
+    {
       "trait_type": "Desk",
       "value": "institutional desk"
     },
@@ -124,6 +140,7 @@
         "uri": "images/GTA-256-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-256"
+    "seed": "ipo-floor-insider-256",
+    "visual_signature": "868D1D10"
   }
 }

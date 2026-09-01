@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "ice white, soft points"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "volume map"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "technical seam"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "balanced screen glow"
+    },
+    {
       "trait_type": "Desk",
       "value": "elite trading desk"
     },
@@ -124,6 +140,7 @@
         "uri": "images/NLNK-326-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-326"
+    "seed": "ipo-floor-insider-326",
+    "visual_signature": "E3D7E87E"
   }
 }

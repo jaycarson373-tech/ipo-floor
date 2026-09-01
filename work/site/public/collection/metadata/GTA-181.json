@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "ice white, low visor"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "signal grid"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "reflective piping"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "right monitor wash"
+    },
+    {
       "trait_type": "Desk",
       "value": "professional workstation"
     },
@@ -124,6 +140,7 @@
         "uri": "images/GTA-181-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-181"
+    "seed": "ipo-floor-insider-181",
+    "visual_signature": "B895C4E5"
   }
 }

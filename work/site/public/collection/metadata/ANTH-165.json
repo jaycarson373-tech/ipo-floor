@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "market red, segmented pixels"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "price ladder"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "chest stitch"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "blackout contrast"
+    },
+    {
       "trait_type": "Desk",
       "value": "basic black desk"
     },
@@ -124,6 +140,7 @@
         "uri": "images/ANTH-165-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-165"
+    "seed": "ipo-floor-insider-165",
+    "visual_signature": "CB2B6EB3"
   }
 }

@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "mint teal, soft points"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "launch scanner"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "technical seam"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "overhead spill"
+    },
+    {
       "trait_type": "Desk",
       "value": "basic black desk"
     },
@@ -124,6 +140,7 @@
         "uri": "images/ANTH-072-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-72"
+    "seed": "ipo-floor-insider-72",
+    "visual_signature": "35C70ED8"
   }
 }

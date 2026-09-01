@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "market red, soft points"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "market depth"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "shoulder panels"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "overhead spill"
+    },
+    {
       "trait_type": "Desk",
       "value": "executive desk"
     },
@@ -124,6 +140,7 @@
         "uri": "images/ANTH-333-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-333"
+    "seed": "ipo-floor-insider-333",
+    "visual_signature": "C4BFA6FC"
   }
 }

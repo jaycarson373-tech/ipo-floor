@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "terminal green, low visor"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "price ladder"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "chest stitch"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "right monitor wash"
+    },
+    {
       "trait_type": "Desk",
       "value": "basic black desk"
     },
@@ -124,6 +140,7 @@
         "uri": "images/NLNK-029-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-29"
+    "seed": "ipo-floor-insider-29",
+    "visual_signature": "1EFDA2AB"
   }
 }

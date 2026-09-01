@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "market red, asymmetric signal"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "order flow"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "technical seam"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "overhead spill"
+    },
+    {
       "trait_type": "Desk",
       "value": "elite trading desk"
     },
@@ -124,6 +140,7 @@
         "uri": "images/ANTH-324-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-324"
+    "seed": "ipo-floor-insider-324",
+    "visual_signature": "575A1462"
   }
 }

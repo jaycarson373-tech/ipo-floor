@@ -322,13 +322,118 @@ function visualStageFor(t, level) {
   return visualStages[Math.max(t.score, level) - 1];
 }
 
+const eyeGlows = [
+  { name: 'terminal green', color: '#b7ff36' },
+  { name: 'cold cyan', color: '#55dfff' },
+  { name: 'signal amber', color: '#ffd45c' },
+  { name: 'soft violet', color: '#aa94ff' },
+  { name: 'market red', color: '#ff6c72' },
+  { name: 'ice white', color: '#dffcff' },
+  { name: 'mint teal', color: '#54ffc8' },
+];
+const eyeShapes = ['narrow slits', 'soft points', 'segmented pixels', 'angled reflection', 'low visor', 'asymmetric signal'];
+const terminalLayouts = ['order flow', 'price ladder', 'launch scanner', 'wallet trace', 'volume map', 'split tape', 'market depth', 'signal grid'];
+const hoodDetails = ['clean black', 'center zip', 'reflective piping', 'technical seam', 'chest stitch', 'shoulder panels'];
+const ambientSignatures = ['left monitor wash', 'right monitor wash', 'balanced screen glow', 'low desk bounce', 'overhead spill', 'blackout contrast'];
+
+function visualIdentityFor(t) {
+  return {
+    eyeGlow: pick(eyeGlows, t.seed, 71),
+    eyeShape: pick(eyeShapes, t.seed, 72),
+    terminalLayout: pick(terminalLayouts, t.seed, 73),
+    hoodDetail: pick(hoodDetails, t.seed, 74),
+    ambient: pick(ambientSignatures, t.seed, 75),
+    signature: t.seed.toString(16).padStart(8, '0').toUpperCase(),
+  };
+}
+
+function terminalPath(seed, salt, x, y, width, height) {
+  const points = Array.from({ length: 9 }, (_, index) => {
+    const value = hashNumber(`${seed}-${salt}-${index}`) % 1000;
+    return [x + (width * index) / 8, y + height - (value / 1000) * height];
+  });
+  return points.map(([px, py], index) => `${index ? 'L' : 'M'}${px.toFixed(1)} ${py.toFixed(1)}`).join(' ');
+}
+
+function terminalOverlay(t, visual) {
+  const c = t.company;
+  const leftChart = terminalPath(t.seed, 81, 64, 195, 244, 138);
+  const rightChart = terminalPath(t.seed, 82, 594, 201, 244, 132);
+  const barCount = 5 + (t.seed % 5);
+  const bars = Array.from({ length: barCount }, (_, index) => {
+    const height = 18 + (hashNumber(`${t.seed}-bar-${index}`) % 62);
+    const x = 619 + index * (184 / barCount);
+    return `<rect x="${x.toFixed(1)}" y="${(368 - height).toFixed(1)}" width="${Math.max(5, 13 - barCount / 2).toFixed(1)}" height="${height}" rx="2" fill="${index % 3 === 0 ? c.accent2 : c.accent}" opacity=".16"/>`;
+  }).join('');
+  const cells = Array.from({ length: 12 }, (_, index) => {
+    const active = (hashNumber(`${t.seed}-cell-${index}`) % 4) !== 0;
+    const x = 83 + (index % 6) * 34;
+    const y = 365 + Math.floor(index / 6) * 18;
+    return `<rect x="${x}" y="${y}" width="${active ? 20 : 10}" height="4" rx="2" fill="${index % 2 ? c.accent : visual.eyeGlow.color}" opacity="${active ? '.18' : '.09'}"/>`;
+  }).join('');
+  return `<g aria-label="${visual.terminalLayout}" opacity=".9">
+    <path d="${leftChart}" fill="none" stroke="${c.accent}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity=".22"/>
+    <path d="${rightChart}" fill="none" stroke="${visual.eyeGlow.color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".18"/>
+    ${bars}${cells}
+  </g>`;
+}
+
+function ambientOverlay(visual) {
+  const placements = {
+    'left monitor wash': [115, 410, 360, 500, .13],
+    'right monitor wash': [785, 410, 360, 500, .13],
+    'balanced screen glow': [450, 390, 430, 420, .09],
+    'low desk bounce': [450, 760, 500, 230, .1],
+    'overhead spill': [450, 40, 390, 340, .08],
+    'blackout contrast': [450, 440, 300, 380, .06],
+  };
+  const [cx, cy, rx, ry, opacity] = placements[visual.ambient];
+  return `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="url(#ambientGlow)" opacity="${opacity}"/>`;
+}
+
+function eyeOverlay(visual, seed) {
+  const color = visual.eyeGlow.color;
+  const y = 342 + ((seed >>> 4) % 5) - 2;
+  const left = 414 + ((seed >>> 10) % 4) - 2;
+  const right = 484 + ((seed >>> 14) % 4) - 2;
+  const tilt = ((seed >>> 18) % 5) - 2;
+  let cores;
+  if (visual.eyeShape === 'soft points') {
+    cores = `<ellipse cx="${left}" cy="${y}" rx="5" ry="2.6"/><ellipse cx="${right}" cy="${y}" rx="5" ry="2.6"/>`;
+  } else if (visual.eyeShape === 'segmented pixels') {
+    cores = `<path d="M${left - 12} ${y}h9m5 0h9M${right - 12} ${y}h9m5 0h9"/>`;
+  } else if (visual.eyeShape === 'angled reflection') {
+    cores = `<path d="M${left - 14} ${y + tilt}l25 ${-tilt - 1}M${right - 11} ${y - 1}l25 ${tilt + 1}"/>`;
+  } else if (visual.eyeShape === 'low visor') {
+    cores = `<path d="M${left - 16} ${y}h31M${right - 15} ${y}h31" stroke-width="2.4"/>`;
+  } else if (visual.eyeShape === 'asymmetric signal') {
+    cores = `<path d="M${left - 13} ${y}h26M${right - 9} ${y}h18"/>`;
+  } else {
+    cores = `<path d="M${left - 14} ${y}h28M${right - 14} ${y}h28"/>`;
+  }
+  return `<g fill="${color}" stroke="${color}" stroke-width="2" stroke-linecap="round">
+    <ellipse cx="450" cy="342" rx="88" ry="44" fill="url(#faceGlow)" stroke="none" opacity=".24"/>
+    <g filter="url(#eyeBloom)" opacity=".25">${cores}</g>
+    <g opacity=".68">${cores}</g>
+  </g>`;
+}
+
+function hoodOverlay(visual, t) {
+  const color = visual.eyeGlow.color;
+  if (visual.hoodDetail === 'center zip') return `<path d="M450 470v230" stroke="${color}" stroke-width="2" opacity=".12"/><path d="M444 468h12" stroke="${color}" stroke-width="3" opacity=".18"/>`;
+  if (visual.hoodDetail === 'reflective piping') return `<path d="M338 512c38 36 70 56 112 58 42-2 74-22 112-58" fill="none" stroke="${color}" stroke-width="2.5" opacity=".12"/>`;
+  if (visual.hoodDetail === 'technical seam') return `<path d="M352 530l52 88 46 28 46-28 52-88" fill="none" stroke="${color}" stroke-width="2" opacity=".11"/>`;
+  if (visual.hoodDetail === 'chest stitch') return `<path d="M414 580h72" stroke="${t.company.accent}" stroke-width="3" opacity=".16"/><path d="M443 572v16m14-16v16" stroke="${color}" stroke-width="2" opacity=".13"/>`;
+  if (visual.hoodDetail === 'shoulder panels') return `<path d="M288 606l96-54M612 552l96 54" stroke="${color}" stroke-width="3" opacity=".10"/>`;
+  return `<path d="M430 488c12 8 28 8 40 0" fill="none" stroke="${color}" stroke-width="2" opacity=".1"/>`;
+}
+
 function overlayFor(serial, level) {
   const t = makeTraits(serial);
   const c = t.company;
   const id = `${c.ticker}-${String(serial).padStart(3, '0')}`;
   const stage = visualStageFor(t, level);
-  const chartOffset = 92 + (t.seed % 110);
-  const chartPeak = 155 + ((t.seed >>> 8) % 90);
+  const visual = visualIdentityFor(t);
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900">
   <defs>
@@ -338,16 +443,22 @@ function overlayFor(serial, level) {
       <stop offset="1" stop-color="${c.accent2}" stop-opacity=".08"/>
     </linearGradient>
     <linearGradient id="plaque" x1="0" x2="1"><stop stop-color="#070909" stop-opacity=".94"/><stop offset="1" stop-color="#111716" stop-opacity=".82"/></linearGradient>
+    <radialGradient id="faceGlow"><stop stop-color="${visual.eyeGlow.color}" stop-opacity=".28"/><stop offset=".42" stop-color="${visual.eyeGlow.color}" stop-opacity=".08"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+    <radialGradient id="ambientGlow"><stop stop-color="${visual.eyeGlow.color}" stop-opacity=".56"/><stop offset="1" stop-color="${visual.eyeGlow.color}" stop-opacity="0"/></radialGradient>
     <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000" flood-opacity=".75"/></filter>
+    <filter id="eyeBloom" x="-100%" y="-400%" width="300%" height="900%"><feGaussianBlur stdDeviation="5"/></filter>
   </defs>
   <rect width="900" height="900" fill="url(#marketTint)"/>
-  <path d="M64 ${chartOffset} C160 ${chartOffset - 26}, 212 ${chartPeak + 26}, 302 ${chartPeak} S462 ${chartPeak - 42}, 540 ${chartPeak - 20}" fill="none" stroke="${c.accent}" stroke-width="3" opacity=".16"/>
+  ${ambientOverlay(visual)}
+  ${terminalOverlay(t, visual)}
+  ${hoodOverlay(visual, t)}
+  ${eyeOverlay(visual, t.seed)}
   <g filter="url(#shadow)">
     <rect x="34" y="810" width="205" height="54" rx="7" fill="url(#plaque)" stroke="${c.accent}" stroke-width="2" opacity=".95"/>
     <text x="54" y="845" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="20" font-weight="800" fill="#f4efe4">IPO #${String(serial).padStart(3, '0')}</text>
     <text x="850" y="845" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="800" fill="${c.accent}" opacity=".9">${c.ticker}</text>
   </g>
-  <desc>IPO Floor anonymous insider ${id}. ${t.rarityName}. ${stage.room}. ${stage.monitors}. ${statuses[level - 1]}.</desc>
+  <desc>IPO Floor anonymous insider ${id}. ${t.rarityName}. ${stage.room}. ${stage.monitors}. ${visual.eyeGlow.name} ${visual.eyeShape}. ${statuses[level - 1]}.</desc>
 </svg>`;
 }
 
@@ -362,6 +473,7 @@ for (const stage of visualStages) {
 
 async function generateInsider(serial) {
   const t = makeTraits(serial);
+  const visual = visualIdentityFor(t);
   const id = `${t.company.ticker}-${String(serial).padStart(3, '0')}`;
   const baseVisual = visualStageFor(t, 1);
   let baseImage;
@@ -386,6 +498,10 @@ async function generateInsider(serial) {
       { trait_type: 'Hood / Clothing', value: 'black technical hoodie' },
       { trait_type: 'Face / Identity', value: 'complete shadow' },
       { trait_type: 'Eyewear', value: 'none' },
+      { trait_type: 'Eye Glow', value: `${visual.eyeGlow.name}, ${visual.eyeShape}` },
+      { trait_type: 'Terminal Layout', value: visual.terminalLayout },
+      { trait_type: 'Hood Detail', value: visual.hoodDetail },
+      { trait_type: 'Ambient Signature', value: visual.ambient },
       { trait_type: 'Desk', value: baseVisual.desk },
       { trait_type: 'Monitor Configuration', value: baseVisual.monitors },
       { trait_type: 'Room', value: baseVisual.room },
@@ -406,6 +522,7 @@ async function generateInsider(serial) {
       ],
       upgrade_images: Array.from({ length: 5 }, (_, i) => ({ level: i + 1, status: statuses[i], uri: `images/${id}-L${i + 1}.webp` })),
       seed: `ipo-floor-insider-${serial}`,
+      visual_signature: visual.signature,
     },
   }, null, 2)}\n`);
 }
@@ -425,6 +542,10 @@ await writeFile(new URL('manifest.json', outDir), `${JSON.stringify({
     'Hood / Clothing',
     'Face / Identity',
     'Eyewear',
+    'Eye Glow',
+    'Terminal Layout',
+    'Hood Detail',
+    'Ambient Signature',
     'Desk',
     'Monitor Configuration',
     'Room',

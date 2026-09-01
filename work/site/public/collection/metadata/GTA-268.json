@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "terminal green, low visor"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "wallet trace"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "reflective piping"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "low desk bounce"
+    },
+    {
       "trait_type": "Desk",
       "value": "institutional desk"
     },
@@ -124,6 +140,7 @@
         "uri": "images/GTA-268-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-268"
+    "seed": "ipo-floor-insider-268",
+    "visual_signature": "A118F509"
   }
 }

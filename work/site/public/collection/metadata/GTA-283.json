@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "market red, segmented pixels"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "wallet trace"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "chest stitch"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "blackout contrast"
+    },
+    {
       "trait_type": "Desk",
       "value": "institutional desk"
     },
@@ -124,6 +140,7 @@
         "uri": "images/GTA-283-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-283"
+    "seed": "ipo-floor-insider-283",
+    "visual_signature": "993C8041"
   }
 }

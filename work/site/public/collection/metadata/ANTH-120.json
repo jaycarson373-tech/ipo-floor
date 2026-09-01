@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "soft violet, segmented pixels"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "wallet trace"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "chest stitch"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "right monitor wash"
+    },
+    {
       "trait_type": "Desk",
       "value": "basic black desk"
     },
@@ -124,6 +140,7 @@
         "uri": "images/ANTH-120-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-120"
+    "seed": "ipo-floor-insider-120",
+    "visual_signature": "124B2F09"
   }
 }

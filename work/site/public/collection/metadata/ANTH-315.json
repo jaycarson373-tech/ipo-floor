@@ -25,6 +25,22 @@
       "value": "none"
     },
     {
+      "trait_type": "Eye Glow",
+      "value": "ice white, soft points"
+    },
+    {
+      "trait_type": "Terminal Layout",
+      "value": "market depth"
+    },
+    {
+      "trait_type": "Hood Detail",
+      "value": "shoulder panels"
+    },
+    {
+      "trait_type": "Ambient Signature",
+      "value": "left monitor wash"
+    },
+    {
       "trait_type": "Desk",
       "value": "elite trading desk"
     },
@@ -124,6 +140,7 @@
         "uri": "images/ANTH-315-L5.webp"
       }
     ],
-    "seed": "ipo-floor-insider-315"
+    "seed": "ipo-floor-insider-315",
+    "visual_signature": "A38912AC"
   }
 }
